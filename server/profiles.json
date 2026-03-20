@@ -1,0 +1,37 @@
+{
+  "123739852": {
+    "name": "Ralph Carvalho",
+    "email": "ralphaacarvalho@gmail.com",
+    "links": "https://ra-l-ph.vercel.app/,\nhttps://www.linkedin.com/in/ralph-carvalho-614b78257/,\nhttps://github.com/RA-L-PH",
+    "education": "Bachelor of Engineering in Information Technology | Mumbai University, Mumbai, MH\n\nHSC | Thomas Baptista Junior College\nVasai, MH",
+    "certifications": "",
+    "jobHistory": "Webmaster | IEEE SFIT Student Branch\nMumbai, MH\nJuly 2023– May 2025\n• Leadership: Acted as the primary technical point of contact for stakeholders, gathering feedback to drive a full\nwebpage revamp that significantly improved user engagement.\n• Teamwork: Collaborated closely with a multi-person development team to review design changes and ensure\nseamless application of new features.\n• Technical Execution: Integrated backend processes using Apps Script to manage organizational information\neffectively.\nWeb Developer | Euphoria Sportz Turf\nVirar, MH\nApril 2020– June 2024\n• Project Ownership: Managed the end-to-end development lifecycle, serving as the sole client-facing represen\ntative from initial consultation to deployment.\n• Problem Solving: Identified usability gaps and proactively designed new web-based interactions to enhance user\nretention and value.\n• UI Development: Led a complete front-end revamp using HTML, CSS, and JS, currently transitioning to React\nto further optimize performance",
+    "eduList": [
+      {
+        "degree": "BTech in IT",
+        "institution": "Mumbai University",
+        "period": "2022 - Present"
+      },
+      {
+        "degree": "HSC",
+        "institution": "Maharashtra State Board",
+        "period": "2020 - 2022"
+      }
+    ],
+    "expList": [
+      {
+        "role": "Webmaster",
+        "company": " IEEE SFIT Student Branch",
+        "period": "July 2023 – May 2025",
+        "description": "• Leadership: Acted as the primary technical point of contact for stakeholders, gathering feedback to drive a full\nwebpage revamp that significantly improved user engagement.\n• Teamwork: Collaborated closely with a multi-person development team to review design changes and ensure\nseamless application of new features.\n• Technical Execution: Integrated backend processes using Apps Script to manage organizational information\neffectively."
+      },
+      {
+        "role": "Web Developer",
+        "company": "Euphoria Sportz Turf",
+        "period": "April 2020 – June 2024",
+        "description": "• Project Ownership: Managed the end-to-end development lifecycle, serving as the sole client-facing represen\ntative from initial consultation to deployment.\n• Problem Solving: Identified usability gaps and proactively designed new web-based interactions to enhance user\nretention and value.\n• UI Development: Led a complete front-end revamp using HTML, CSS, and JS, currently transitioning to React\nto further optimize performance."
+      }
+    ],
+    "certList": []
+  }
+}
