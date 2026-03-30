@@ -1,588 +1,43 @@
 {
   "RA-L-PH/OpOct": {
     "projectName": "OpOct",
-    "technicalSummary": "Designed and developed a solution repository to tackle challenges presented during the Open October event, leveraging collaborative development and testing strategies.",
+    "oneLineSummary": "Solved challenges and developed solutions for the Open October event",
+    "technicalSummary": "This project involved designing, testing, and implementing solutions to address specific challenges presented during the Open October event, with a focus on collaborative problem-solving and innovative thinking",
     "techStack": [
-      "Collaborative Development",
-      "Testing Strategies"
+      "Python",
+      "JavaScript",
+      "HTML/CSS"
     ],
     "bullets": [
-      "Created a centralized repository for testing and solution development",
-      "Utilized collaborative development strategies to ensure efficient problem-solving",
-      "Implemented testing strategies to validate solution effectiveness"
+      "Designed and developed multiple solutions to address event challenges",
+      "Collaborated with team members to share knowledge and best practices",
+      "Utilized version control systems to track changes and updates",
+      "Conducted thorough testing and debugging to ensure solution quality"
     ]
   },
   "RA-L-PH/Nexta": {
     "projectName": "Nexta",
-    "technicalSummary": "Designed and developed a full-stack web application for freelancers and clients to find each other, utilizing React, Firebase, and Tailwind CSS for a seamless user experience.",
+    "oneLineSummary": "Developed a full-stack web application for freelancers and clients to find each other, leveraging React, Firebase, and Tailwind CSS",
+    "technicalSummary": "Designed and implemented a scalable web application with user authentication, profile management, job postings, and real-time chat functionality, utilizing React, React Router, and Firebase Firestore",
     "techStack": [
       "React",
       "Firebase",
       "Tailwind CSS",
-      "Netlify"
+      "React Router",
+      "Firebase Firestore"
     ],
     "bullets": [
       "Implemented user authentication and authorization using Firebase Authentication",
-      "Developed freelancer profiles with skills, experience, and education using React and Firebase Firestore",
-      "Created job postings with descriptions, requirements, and applications using React and Firebase Firestore",
-      "Integrated real-time chat for freelancers and clients using Firebase Firestore",
+      "Developed freelancer profiles with skills, experience, and education management",
+      "Created job postings with descriptions, requirements, and application management",
+      "Integrated real-time chat functionality for freelancers and clients",
       "Deployed the application on Netlify for scalable and secure hosting"
-    ]
-  },
-  "RA-L-PH/Song-dentify": {
-    "projectName": "Song-dentify",
-    "technicalSummary": "Contributed to the development of a music identification application, utilizing React and other technologies to create a user-friendly interface.",
-    "techStack": [
-      "React"
-    ],
-    "bullets": [
-      "Assisted in designing and implementing the application's UI components using React",
-      "Collaborated with the team to integrate music identification functionality using external APIs"
-    ]
-  },
-  "AnsleyRebello/client": {
-    "projectName": "client",
-    "technicalSummary": "Developed a React-based client-side application, utilizing Create React App for a streamlined development process.",
-    "techStack": [
-      "React",
-      "Create React App"
-    ],
-    "bullets": [
-      "Set up the project using Create React App for a fast and efficient development environment",
-      "Implemented React components for a responsive and interactive user interface"
-    ]
-  },
-  "anishvkalbhor/DocPoint": {
-    "projectName": "DocPoint",
-    "technicalSummary": "Worked on a full-stack application, utilizing Node.js and Firebase for a robust backend and scalable storage.",
-    "techStack": [
-      "Node.js",
-      "Firebase"
-    ],
-    "bullets": [
-      "Developed a Node.js backend using Express.js for API routing and handling",
-      "Integrated Firebase for real-time data storage and synchronization"
-    ]
-  },
-  "RA-L-PH/reflex": {
-    "projectName": "reflex",
-    "technicalSummary": "Contributed to the development of a custom component library, utilizing React and other technologies for a seamless user experience.",
-    "techStack": [
-      "React"
-    ],
-    "bullets": [
-      "Assisted in designing and implementing custom React components for a reusable library",
-      "Collaborated with the team to integrate the components into a larger application"
-    ]
-  },
-  "RA-L-PH/StudyHive": {
-    "projectName": "StudyHive",
-    "technicalSummary": "Created a comprehensive travel planning platform using Flask, featuring personalized trip planning, pilgrimage route optimization, and accommodation recommendations.",
-    "techStack": [
-      "Flask",
-      "Python",
-      "Google Cloud",
-      "Gemini API"
-    ],
-    "bullets": [
-      "Designed and developed a user-friendly interface for trip planning",
-      "Implemented pilgrimage route optimization using Gemini API",
-      "Integrated accommodation recommendations and travel itinerary generation",
-      "Managed budget and weather forecasts for trips"
-    ]
-  },
-  "RA-L-PH/RoadScan": {
-    "projectName": "RoadScan",
-    "technicalSummary": "Developed a web application using Flask, featuring user authentication, database integration, and responsive design.",
-    "techStack": [
-      "Flask",
-      "Python",
-      "SQLite",
-      "WTForms"
-    ],
-    "bullets": [
-      "Implemented secure login and registration system",
-      "Integrated SQLite database for data storage",
-      "Designed and developed a responsive UI for desktop and mobile devices",
-      "Managed user authentication and authorization"
-    ]
-  },
-  "RA-L-PH/YatraHub": {
-    "projectName": "YatraHub",
-    "technicalSummary": "Created a comprehensive travel planning platform using Flask, featuring personalized trip planning, pilgrimage route optimization, and accommodation recommendations.",
-    "techStack": [
-      "Flask",
-      "Python",
-      "Google Cloud",
-      "Gemini API"
-    ],
-    "bullets": [
-      "Designed and developed a user-friendly interface for trip planning",
-      "Implemented pilgrimage route optimization using Gemini API",
-      "Integrated accommodation recommendations and travel itinerary generation",
-      "Managed budget and weather forecasts for trips"
-    ]
-  },
-  "RA-L-PH/Moneta": {
-    "projectName": "Moneta",
-    "technicalSummary": "Developed a comprehensive AI-powered personal finance tracking application using Flutter, Firebase, and Google's Gemini AI. Implemented automatic SMS transaction capture, multi-bank support, and real-time processing. Integrated AI-powered financial intelligence for personalized tips, smart categorization, budget planning, and investment advice. Designed comprehensive analytics for monthly reports, visual insights, and savings rate tracking.",
-    "techStack": "Flutter, Firebase, Google's Gemini AI, Dart",
-    "bullets": [
-      "Automatic SMS transaction capture and parsing",
-      "Multi-bank support for Indian banks",
-      "Real-time processing and duplicate prevention",
-      "AI-powered financial intelligence for personalized tips and budget planning",
-      "Comprehensive analytics for monthly reports and visual insights"
-    ]
-  },
-  "RA-L-PH/extensions": {
-    "projectName": "extensions",
-    "technicalSummary": "Created two Chrome extensions: Advanced Font Changer and Inactivity Locker. Advanced Font Changer allows users to change fonts on all websites with an intuitive category-based selection interface. Inactivity Locker detects user inactivity and locks the browser with a password-protected overlay.",
-    "techStack": "Chrome Extensions, JavaScript, HTML, CSS",
-    "bullets": [
-      "Advanced Font Changer: category-based font selection and Google Fonts integration",
-      "Inactivity Locker: idle detection, password-protected overlay, and right-click disabling"
-    ]
-  },
-  "RA-L-PH/Data-Science-Monorepo": {
-    "projectName": "Data-Science-Monorepo",
-    "technicalSummary": "Contributed to various data science projects, including Face Mask Detection with YOLO, COVID-19 Exploratory Data Analysis, and Google Play Store Exploratory Data Analysis. Utilized Python, Jupyter Notebooks, and libraries like Pandas, NumPy, and Matplotlib for data analysis and visualization.",
-    "techStack": "Python, Jupyter Notebooks, Pandas, NumPy, Matplotlib",
-    "bullets": [
-      "Face Mask Detection with YOLO: trained and evaluated a face mask detection model",
-      "COVID-19 Exploratory Data Analysis: analyzed global COVID-19 data for trends and insights",
-      "Google Play Store Exploratory Data Analysis: examined app performance, user engagement, and market competition"
-    ]
-  },
-  "RA-L-PH/eduquiz": {
-    "projectName": "eduquiz",
-    "technicalSummary": "Developed an open-source interactive learning platform, EduQuiz, with features like interactive quizzes, real-time participation, live leaderboards, and customizable content. Built using a community-driven approach with a focus on accessibility and sustainability.",
-    "techStack": "JavaScript, HTML, CSS, Community-driven development",
-    "bullets": [
-      "Interactive quizzes with rich media support",
-      "Real-time participation and live leaderboards",
-      "Customizable content and collaborative question bank"
-    ]
-  },
-  "RA-L-PH/IntentCSS": {
-    "projectName": "IntentCSS",
-    "technicalSummary": "Not enough information provided to generate a technical summary.",
-    "techStack": [],
-    "bullets": []
-  },
-  "LavrinAlmeida/IOE": {
-    "projectName": "IOE",
-    "technicalSummary": "Not enough information provided to generate a technical summary.",
-    "techStack": [],
-    "bullets": []
-  },
-  "RA-L-PH/myjslibrary": {
-    "projectName": "myjslibrary",
-    "technicalSummary": "Not enough information provided to generate a technical summary.",
-    "techStack": [
-      "JavaScript"
-    ],
-    "bullets": []
-  },
-  "RA-L-PH/drive-wa-bot": {
-    "projectName": "drive-wa-bot",
-    "technicalSummary": "Developed a WhatsApp bot that enables users to send files, which are then automatically uploaded to their Google Drive using a Python backend and a React frontend with Vite and Tailwind CSS.",
-    "techStack": [
-      "Python",
-      "React",
-      "Vite",
-      "Tailwind CSS",
-      "Google Drive API"
-    ],
-    "bullets": [
-      "Designed and implemented a seamless file upload system using WhatsApp and Google Drive API",
-      "Developed a user-friendly web app for easy authorization and guidance",
-      "Ensured secure OAuth authentication for Google Drive integration",
-      "Optimized the application for fast and reliable file uploads"
-    ]
-  },
-  "RA-L-PH/Automatic-License-Plate-Recognition-using-YOLOv8": {
-    "projectName": "Automatic-License-Plate-Recognition-using-YOLOv8",
-    "technicalSummary": "Built an automatic license plate recognition system using YOLOv8, OpenCV, and Python, achieving accurate plate detection and recognition.",
-    "techStack": [
-      "YOLOv8",
-      "OpenCV",
-      "Python",
-      "Deep Learning"
-    ],
-    "bullets": [
-      "Trained a YOLOv8 model for license plate detection and recognition",
-      "Implemented a real-time video processing system using OpenCV",
-      "Achieved high accuracy in plate detection and recognition",
-      "Optimized the system for fast and efficient processing"
-    ]
-  },
-  "ieee-sfit/ieee-event-catalog": {
-    "projectName": "ieee-event-catalog",
-    "technicalSummary": "No technical details available",
-    "techStack": [],
-    "bullets": []
-  },
-  "joshua04d/IEEE-battleship102": {
-    "projectName": "IEEE-battleship102",
-    "technicalSummary": "No technical details available",
-    "techStack": [],
-    "bullets": []
-  },
-  "RA-L-PH/sort": {
-    "projectName": "sort",
-    "technicalSummary": "Implemented a simple online and real-time tracking algorithm for 2D multiple object tracking in video sequences using Python and OpenCV.",
-    "techStack": [
-      "Python",
-      "OpenCV",
-      "Computer Vision"
-    ],
-    "bullets": [
-      "Developed a tracking algorithm for 2D multiple object tracking",
-      "Implemented a real-time video processing system using OpenCV",
-      "Achieved accurate object tracking and identification",
-      "Optimized the system for fast and efficient processing"
-    ]
-  },
-  "RA-L-PH/automatic-number-plate-recognition-python-yolov8": {
-    "projectName": "automatic-number-plate-recognition-python-yolov8",
-    "technicalSummary": "Built an automatic number plate recognition system using YOLOv8, OpenCV, and Python, achieving accurate plate detection and recognition.",
-    "techStack": [
-      "YOLOv8",
-      "OpenCV",
-      "Python",
-      "Deep Learning"
-    ],
-    "bullets": [
-      "Trained a YOLOv8 model for license plate detection and recognition",
-      "Implemented a real-time video processing system using OpenCV",
-      "Achieved high accuracy in plate detection and recognition",
-      "Optimized the system for fast and efficient processing"
-    ]
-  },
-  "RA-L-PH/healtify": {
-    "projectName": "healtify",
-    "technicalSummary": "Developed a health assistant application using React, Vite, and Tailwind CSS, featuring a chatbot for symptom analysis, health analysis, and personalized medication recommendations.",
-    "techStack": [
-      "React",
-      "Vite",
-      "Tailwind CSS",
-      "Google Generative AI"
-    ],
-    "bullets": [
-      "Designed and implemented a user-friendly health assistant application",
-      "Developed a chatbot for symptom analysis and health advice",
-      "Implemented a health analysis system for personalized recommendations",
-      "Optimized the application for fast and efficient processing"
-    ]
-  },
-  "RA-L-PH/ieeewie": {
-    "projectName": "ieeewie",
-    "technicalSummary": "No technical details available",
-    "techStack": [],
-    "bullets": []
-  },
-  "RA-L-PH/Vision-Quest": {
-    "projectName": "Vision-Quest",
-    "technicalSummary": "Researched and proposed updates to spatial mapping models using Transformers, including monocular depth estimation and SLAM, for improved accuracy and efficiency.",
-    "techStack": "Transformers, Hugging Face, Python",
-    "bullets": [
-      "Explored monocular depth estimation with Transformers for improved accuracy",
-      "Proposed SLAM with Transformers for efficient spatial mapping",
-      "Utilized Hugging Face Transformers library for model implementation"
-    ]
-  },
-  "RA-L-PH/Ed": {
-    "projectName": "Ed",
-    "technicalSummary": "Developed a Windows assistant application with unspecified features and functionality.",
-    "techStack": "Windows, C++",
-    "bullets": [
-      "Created a Windows assistant application with unspecified features"
-    ]
-  },
-  "sanika2520/RoadScan_4": {
-    "projectName": "RoadScan_4",
-    "technicalSummary": "Built a React-based web application with Create React App, featuring a responsive design and unspecified functionality.",
-    "techStack": "React, Create React App, CSS3",
-    "bullets": [
-      "Developed a React app with Create React App",
-      "Utilized CSS3 for responsive design"
-    ]
-  },
-  "RA-L-PH/icon4win": {
-    "projectName": "icon4win",
-    "technicalSummary": "Created an unspecified project with no provided details.",
-    "techStack": "",
-    "bullets": []
-  },
-  "krutibagwe/RoadScan": {
-    "projectName": "RoadScan",
-    "technicalSummary": "Built a React-based web application with Create React App, featuring a responsive design and unspecified functionality.",
-    "techStack": "React, Create React App, CSS3",
-    "bullets": [
-      "Developed a React app with Create React App",
-      "Utilized CSS3 for responsive design"
-    ]
-  },
-  "RA-L-PH/portfolio-react": {
-    "projectName": "portfolio-react",
-    "technicalSummary": "Developed a modern React-based portfolio website using Vite, with a focus on SEO and production settings. Implemented a responsive design, optimized social preview images, and ensured proper meta tags and canonical links.",
-    "techStack": [
-      "React",
-      "Vite",
-      "ESLint",
-      "Tailwind CSS"
-    ],
-    "bullets": [
-      "Designed a responsive and SEO-friendly website",
-      "Implemented a modern React architecture with Vite",
-      "Optimized social preview images and meta tags"
-    ]
-  },
-  "RA-L-PH/just": {
-    "projectName": "just",
-    "technicalSummary": "Created a minimalistic project with a focus on simplicity and ease of use. Implemented a straightforward architecture and ensured a seamless user experience.",
-    "techStack": [],
-    "bullets": [
-      "Designed a minimalistic and user-friendly interface",
-      "Implemented a simple and efficient architecture"
-    ]
-  },
-  "RA-L-PH/BattleShips": {
-    "projectName": "BattleShips",
-    "technicalSummary": "Developed a feature-rich Battleship game with real-time multiplayer capabilities, hierarchical user management, and multiple game modes. Implemented a robust game engine and ensured a seamless user experience.",
-    "techStack": [
-      "React",
-      "Firebase",
-      "Vite",
-      "Tailwind CSS"
-    ],
-    "bullets": [
-      "Designed a feature-rich Battleship game with real-time multiplayer",
-      "Implemented a robust game engine with hierarchical user management",
-      "Ensured a seamless user experience with multiple game modes"
-    ]
-  },
-  "RA-L-PH/neo-minecraft": {
-    "projectName": "neo-minecraft",
-    "technicalSummary": "Set up a NeoForge Minecraft server compatible with GitHub Codespaces. Implemented a straightforward setup process and ensured a seamless user experience.",
-    "techStack": [
-      "NeoForge",
-      "GitHub Codespaces",
-      "Java"
-    ],
-    "bullets": [
-      "Set up a NeoForge Minecraft server with GitHub Codespaces",
-      "Implemented a straightforward setup process",
-      "Ensured a seamless user experience"
-    ]
-  },
-  "RA-L-PH/OuterTune": {
-    "projectName": "OuterTune",
-    "technicalSummary": "Contributed to the OuterTune project, a modern music player with a focus on user experience and customization. Implemented various features and ensured a seamless user experience.",
-    "techStack": [
-      "Android",
-      "Java",
-      "FFmpeg"
-    ],
-    "bullets": [
-      "Contributed to the OuterTune project, a modern music player",
-      "Implemented various features and ensured a seamless user experience",
-      "Worked with a team to ensure a high-quality user experience"
-    ]
-  },
-  "RA-L-PH/image": {
-    "projectName": "image",
-    "technicalSummary": "Created a minimalistic project with a focus on simplicity and ease of use. Implemented a straightforward architecture and ensured a seamless user experience.",
-    "techStack": [],
-    "bullets": [
-      "Designed a minimalistic and user-friendly interface",
-      "Implemented a simple and efficient architecture"
-    ]
-  },
-  "RA-L-PH/python-rpi": {
-    "projectName": "python-rpi",
-    "technicalSummary": "Developed a unified Flask application for real-time retail shelf monitoring with AI-powered analytics. Implemented a robust application with a focus on user experience and customization.",
-    "techStack": [
-      "Flask",
-      "Python",
-      "SQLite",
-      "Jinja2"
-    ],
-    "bullets": [
-      "Developed a unified Flask application for real-time retail shelf monitoring",
-      "Implemented a robust application with AI-powered analytics",
-      "Ensured a seamless user experience with a focus on customization"
-    ]
-  },
-  "RA-L-PH/tachiyomi-revived": {
-    "projectName": "tachiyomi-revived",
-    "technicalSummary": "Contributed to the Tachiyomi project, a free open-source manga reader with an inbuilt ebook reader. Implemented various features and ensured a seamless user experience.",
-    "techStack": [
-      "Java",
-      "Android"
-    ],
-    "bullets": [
-      "Contributed to the Tachiyomi project, a free open-source manga reader",
-      "Implemented various features and ensured a seamless user experience",
-      "Worked with a team to ensure a high-quality user experience"
-    ]
-  },
-  "conanferreira123/Major": {
-    "projectName": "Major",
-    "technicalSummary": "Developed a comprehensive features implementation guide for the new sidebar pages in the Major workspace, including integrations, communication platforms, data sources, and AI services.",
-    "techStack": "Node.js, React, Redux, Material-UI",
-    "bullets": [
-      "Designed and implemented a features implementation guide for the new sidebar pages",
-      "Integrated external services, APIs, and data sources to enhance workspace capabilities",
-      "Developed a communication platform with email and calendar sync, and Slack/Teams integration",
-      "Implemented AI services, including OpenAI API integration and custom model endpoints"
-    ]
-  },
-  "RA-L-PH/RepoResume": {
-    "projectName": "RepoResume",
-    "technicalSummary": "Created a repository to run and deploy an AI Studio app, including setup instructions and a quick start guide.",
-    "techStack": "Node.js, npm, AI Studio",
-    "bullets": [
-      "Set up a repository for running and deploying an AI Studio app",
-      "Created a quick start guide for running the app locally",
-      "Configured environment variables for the app"
-    ]
-  },
-  "RA-L-PH/Chimera-AI": {
-    "projectName": "Chimera-AI",
-    "technicalSummary": "Updated a model list with 50+ new models from the latest provided list, replacing the previous 20-model configuration.",
-    "techStack": "Python, AI models, Gemini Pro, DeepSeek, Llama 3",
-    "bullets": [
-      "Updated the model list with 50+ new models",
-      "Replaced the previous 20-model configuration",
-      "Implemented a comprehensive new model list"
-    ]
-  },
-  "RA-L-PH/12-python": {
-    "projectName": "12-python",
-    "technicalSummary": "Created a repository containing 12 beginner-friendly Python mini projects to practice core programming concepts.",
-    "techStack": "Python, beginner projects",
-    "bullets": [
-      "Created a repository with 12 beginner-friendly Python mini projects",
-      "Practiced core programming concepts, including user input and output, conditional logic, loops, and functions"
-    ]
-  },
-  "RA-L-PH/Jidoka": {
-    "projectName": "Jidoka",
-    "technicalSummary": "Developed a revolutionary project management system that uses AI to automatically track work, including AI-powered PRD parsing, auto-task updates, and real-time sync.",
-    "techStack": "React, FastAPI, Supabase, Google OAuth",
-    "bullets": [
-      "Developed a project management system that uses AI to track work",
-      "Implemented AI-powered PRD parsing and auto-task updates",
-      "Enabled real-time sync across all devices"
-    ]
-  },
-  "RA-L-PH/Jidoka-Test": {
-    "projectName": "Jidoka-Test",
-    "technicalSummary": "Created a Task Management API with secure authentication, including user registration, login, and task management.",
-    "techStack": "Node.js, PostgreSQL, JWT, authentication",
-    "bullets": [
-      "Created a Task Management API with secure authentication",
-      "Implemented user registration, login, and task management",
-      "Enabled secure authentication with JWT"
-    ]
-  },
-  "yking-ly/NineToFive": {
-    "projectName": "NineToFive",
-    "technicalSummary": "Developed an AI-powered legal helper with bilingual statutory querying, interactive clause comparison, and intelligent RAG pipeline.",
-    "techStack": "Python, RAG, AI models, Indian Penal Code, Bhartiya Nyaya Sanhita",
-    "bullets": [
-      "Developed an AI-powered legal helper with bilingual statutory querying",
-      "Implemented interactive clause comparison and mapping",
-      "Enabled intelligent RAG pipeline for context-aware answers"
-    ]
-  },
-  "RA-L-PH/PixelPlayer": {
-    "projectName": "PixelPlayer",
-    "technicalSummary": "Created a music player with a modern UI/UX, powerful playback, and customizable features, including Material You, smooth animations, and album art colors.",
-    "techStack": "Kotlin, Jetpack Compose, Material Design 3, Android",
-    "bullets": [
-      "Created a music player with a modern UI/UX",
-      "Implemented powerful playback with Media3 ExoPlayer",
-      "Enabled customizable features, including Material You and album art colors"
-    ]
-  },
-  "RA-L-PH/Contro": {
-    "projectName": "Contro",
-    "technicalSummary": "Developed a comprehensive control system utilizing Python, Flask, and React, enabling real-time monitoring and automation of industrial processes. Demonstrated expertise in designing scalable architectures, integrating APIs, and ensuring seamless user experiences.",
-    "techStack": "Python, Flask, React, Industrial Automation",
-    "bullets": [
-      "Designed and implemented a RESTful API using Flask to manage industrial control systems",
-      "Created a user-friendly interface with React, enabling real-time monitoring and control of industrial processes",
-      "Integrated with industrial hardware and software systems to ensure seamless automation",
-      "Ensured scalability and reliability through load testing and optimization"
-    ]
-  },
-  "joshua04d/ieeegallery": {
-    "projectName": "ieeegallery",
-    "technicalSummary": "Developed a comprehensive gallery solution utilizing [insert relevant technologies or frameworks]. Demonstrated expertise in [specific skills or areas of focus], resulting in [desirable outcome or impact].",
-    "techStack": "[]",
-    "bullets": "[]"
-  },
-  "RA-L-PH/mini1": {
-    "projectName": "mini1",
-    "technicalSummary": "Created a minimal React setup with Vite, incorporating Hot Module Replacement (HMR) and ESLint rules. Successfully integrated official plugins, including @vitejs/plugin-react and @vitejs/plugin-react-swc, to enable Fast Refresh with Babel and SWC.",
-    "techStack": "React, Vite, HMR, ESLint, Babel, SWC",
-    "bullets": [
-      "Set up a minimal React project with Vite",
-      "Configured HMR for efficient development",
-      "Implemented ESLint rules for code quality",
-      "Integrated official plugins for Fast Refresh"
-    ]
-  },
-  "RA-L-PH/StudyHive-css": {
-    "projectName": "StudyHive-css",
-    "technicalSummary": "Designed and developed a CSS solution for StudyHive, leveraging [insert relevant CSS techniques or frameworks]. Improved [specific aspect of the project] by [desirable percentage or metric], resulting in [desirable outcome or impact].",
-    "techStack": "CSS",
-    "bullets": "[]"
-  },
-  "BronilKoli/Food_Donation": {
-    "projectName": "Food_Donation",
-    "technicalSummary": "Developed a web application using Flask, Flask-SQLAlchemy, and SQLAlchemy to manage food donations. Implemented user authentication with Flask-Login and Flask-WTF, and utilized Flask-Migrate for database migrations. Ensured security with Flask-Security-Too and bcrypt.",
-    "techStack": [
-      "Flask",
-      "Flask-SQLAlchemy",
-      "SQLAlchemy",
-      "Werkzeug",
-      "python-dotenv",
-      "Jinja2",
-      "MarkupSafe",
-      "itsdangerous",
-      "click",
-      "blinker",
-      "Flask-Login",
-      "Flask-WTF",
-      "email-validator",
-      "Flask-Migrate",
-      "alembic",
-      "WTForms",
-      "datetime",
-      "python-dotenv",
-      "Flask-Security-Too",
-      "bcrypt",
-      "pytest",
-      "pytest-cov",
-      "black",
-      "flake8"
-    ],
-    "bullets": [
-      "Designed and implemented a database schema using SQLAlchemy",
-      "Developed user authentication and authorization using Flask-Login and Flask-WTF",
-      "Utilized Flask-Migrate for database migrations and alembic for version control",
-      "Implemented form handling with WTForms and date/time handling with datetime",
-      "Ensured security with Flask-Security-Too and bcrypt",
-      "Conducted unit testing with pytest and pytest-cov"
     ]
   },
   "RA-L-PH/Flask-Project": {
     "projectName": "Flask-Project",
-    "technicalSummary": "Built a web application using Flask, a lightweight WSGI web application framework in Python. Implemented user authentication, database integration with SQLite, and a responsive design. Utilized modular codebase for easy maintenance and extension.",
+    "oneLineSummary": "Web application built with Flask, featuring user authentication, database integration, and responsive design",
+    "technicalSummary": "Utilizes Flask, a lightweight WSGI web application framework, with SQLite for data storage and a modular codebase for easy extension",
     "techStack": [
       "Flask",
       "Python",
@@ -590,16 +45,402 @@
       "WSGI"
     ],
     "bullets": [
-      "Developed a user authentication system with secure login and registration",
-      "Integrated SQLite database for data storage and management",
-      "Designed a responsive and modular codebase for easy maintenance and extension",
-      "Utilized Flask for building a lightweight and flexible web application"
+      "Implemented user authentication with secure login and registration system",
+      "Integrated with SQLite for data storage and retrieval",
+      "Designed a responsive UI for a great user experience on both desktop and mobile devices",
+      "Organized codebase into modular components for easy understanding and extension"
+    ]
+  },
+  "RA-L-PH/YatraHub": {
+    "projectName": "YatraHub",
+    "oneLineSummary": "Comprehensive travel planning platform with personalized trip planning and pilgrimage route optimization",
+    "technicalSummary": "Built with Python, utilizing Google Cloud's Gemini API for AI-powered recommendations and a user-friendly interface for trip planning",
+    "techStack": [
+      "Python",
+      "Google Cloud",
+      "Gemini API",
+      "AI"
+    ],
+    "bullets": [
+      "Designed a user-friendly interface for users to plan their trips and pilgrimages",
+      "Implemented personalized trip planning with recommendations for accommodations and sacred sites",
+      "Utilized Google Cloud's Gemini API for AI-powered route optimization and travel itinerary generation",
+      "Integrated with Google Maps for location-based services and weather forecasts"
+    ]
+  },
+  "RA-L-PH/RepoResume": {
+    "projectName": "RepoResume",
+    "oneLineSummary": "AI-driven resume generation platform",
+    "technicalSummary": "RepoResume utilizes advanced RAG and AI consolidation to transform GitHub repository data into professional engineering resumes, optimized for ATS compatibility",
+    "techStack": [
+      "React",
+      "Node.js",
+      "AI"
+    ],
+    "bullets": [
+      "Automated repository context extraction",
+      "Intelligent project selection and consolidation",
+      "ATS-optimized resume formatting"
+    ]
+  },
+  "RA-L-PH/Jidoka": {
+    "projectName": "Jidoka",
+    "oneLineSummary": "AI-powered project management system",
+    "techStack": [
+      "AI",
+      "GitHub",
+      "Google OAuth"
+    ],
+    "bullets": [
+      "Task Automation: AI-driven task automation",
+      "Real-time Synchronization: Real-time sync across devices",
+      "Authentication: Secure authentication via Google OAuth"
+    ]
+  },
+  "yking-ly/NineToFive": {
+    "projectName": "NineToFive",
+    "oneLineSummary": "Firebase-integrated legal application",
+    "technicalSummary": "NineToFive incorporates Firebase for authentication, document management, and chat history persistence, with a focus on legal document analysis and retrieval",
+    "techStack": [
+      "Firebase",
+      "Google Sign-In",
+      "Firestore"
+    ],
+    "bullets": [
+      "Firebase Authentication for secure user management",
+      "Document management with Firestore",
+      "Integration with Google Sign-In for seamless authentication"
+    ]
+  },
+  "RA-L-PH/PixelPlayer": {
+    "projectName": "PixelPlayer",
+    "oneLineSummary": "Feature-rich music player for Android",
+    "technicalSummary": "PixelPlayer offers a modern UI, powerful playback capabilities, and customization options, built with Jetpack Compose and Material Design 3",
+    "techStack": [
+      "Jetpack Compose",
+      "Material Design 3",
+      "Kotlin"
+    ],
+    "bullets": [
+      "Modern UI with dynamic color theming",
+      "Smooth animations and micro-interactions",
+      "Customizable UI with adjustable corner radius and navigation bar settings"
+    ]
+  },
+  "LavrinAlmeida/IOE": {
+    "projectName": "IOE",
+    "oneLineSummary": "Developed a React application using Vite, with a focus on HMR, ESLint, and TypeScript",
+    "technicalSummary": "Designed and implemented a React application using Vite, with a focus on Hot Module Replacement, ESLint, and TypeScript, for a fast and efficient development workflow",
+    "techStack": [
+      "React",
+      "Vite",
+      "ESLint",
+      "TypeScript"
+    ],
+    "bullets": [
+      "Implemented React application using Vite",
+      "Utilized HMR for fast development workflow",
+      "Ensured code quality using ESLint",
+      "Developed application using TypeScript",
+      "Ensured adherence to project standards"
+    ]
+  },
+  "RA-L-PH/portfolio-react": {
+    "projectName": "portfolio-react",
+    "oneLineSummary": "Developed a modern React application with Vite and ESLint for efficient development and best SEO practices",
+    "technicalSummary": "Designed and implemented a React application using Vite for fast and efficient development, incorporating ESLint for code quality and best practices. Ensured optimal SEO by configuring environment variables for absolute URLs and adding meta tags, canonical links, and JSON-LD. Implemented a social preview image and added robots.txt and sitemap.xml for crawler accessibility.",
+    "techStack": [
+      "React",
+      "Vite",
+      "ESLint",
+      "SEO"
+    ],
+    "bullets": [
+      "Configured Vite for fast and efficient development",
+      "Implemented ESLint for code quality and best practices",
+      "Ensured optimal SEO with environment variables and meta tags",
+      "Added social preview image and crawler accessibility files"
+    ]
+  },
+  "RA-L-PH/BattleShips": {
+    "projectName": "BattleShips",
+    "oneLineSummary": "Created a feature-rich Battleship game with real-time multiplayer capabilities and hierarchical user management",
+    "technicalSummary": "Developed a modern Battleship game application with real-time multiplayer functionality, hierarchical user management, and multiple game modes. Implemented a comprehensive ability analysis to ensure proper turn switching and move recording. Utilized React, Vite, and Firebase for a scalable and efficient architecture.",
+    "techStack": [
+      "React",
+      "Vite",
+      "Firebase",
+      "Real-time Multiplayer"
+    ],
+    "bullets": [
+      "Designed and implemented real-time multiplayer functionality",
+      "Developed hierarchical user management system",
+      "Conducted comprehensive ability analysis for proper turn switching and move recording",
+      "Utilized React, Vite, and Firebase for a scalable architecture"
+    ]
+  },
+  "RA-L-PH/neo-minecraft": {
+    "projectName": "neo-minecraft",
+    "oneLineSummary": "Set up a NeoForge Minecraft server compatible with GitHub Codespaces for efficient development and collaboration",
+    "technicalSummary": "Configured a NeoForge Minecraft server for compatibility with GitHub Codespaces, enabling efficient development and collaboration. Implemented a setup script for easy installation and a start script for seamless server startup. Ensured proper port forwarding and memory configuration for optimal performance.",
+    "techStack": [
+      "NeoForge",
+      "Minecraft",
+      "GitHub Codespaces"
+    ],
+    "bullets": [
+      "Configured NeoForge Minecraft server for GitHub Codespaces compatibility",
+      "Implemented setup and start scripts for easy installation and startup",
+      "Ensured proper port forwarding and memory configuration for optimal performance"
+    ]
+  },
+  "RA-L-PH/OuterTune": {
+    "projectName": "OuterTune",
+    "oneLineSummary": "Contributed to the development of OuterTune, a music player application with a focus on translation and codebase improvements",
+    "technicalSummary": "Participated in the development of OuterTune, a music player application, by contributing to translation efforts and codebase improvements. Utilized Weblate for translation management and followed guidelines for submitting pull requests and code reviews. Improved code quality and readability through refactoring and documentation.",
+    "techStack": [
+      "OuterTune",
+      "Weblate",
+      "Code Review"
+    ],
+    "bullets": [
+      "Contributed to translation efforts using Weblate",
+      "Improved codebase through refactoring and documentation",
+      "Followed guidelines for submitting pull requests and code reviews",
+      "Enhanced code quality and readability"
+    ]
+  },
+  "RA-L-PH/python-rpi": {
+    "projectName": "python-rpi",
+    "oneLineSummary": "Developed a unified Flask application for real-time retail shelf monitoring with AI-powered analytics",
+    "technicalSummary": "Designed and implemented a unified Flask application for real-time retail shelf monitoring, incorporating AI-powered analytics for insights and trends. Utilized SQLAlchemy for database management and Jinja2 for server-side rendering. Implemented a cooldown system with notifications and real-time status updates.",
+    "techStack": [
+      "Flask",
+      "SQLAlchemy",
+      "Jinja2",
+      "AI-powered Analytics"
+    ],
+    "bullets": [
+      "Developed a unified Flask application for real-time shelf monitoring",
+      "Incorporated AI-powered analytics for insights and trends",
+      "Utilized SQLAlchemy for database management and Jinja2 for server-side rendering",
+      "Implemented a cooldown system with notifications and real-time status updates"
+    ]
+  },
+  "RA-L-PH/tachiyomi-revived": {
+    "projectName": "tachiyomi-revived",
+    "oneLineSummary": "Contributed to the development of Tachiyomi, a free and open-source manga reader application",
+    "technicalSummary": "Participated in the development of Tachiyomi, a free and open-source manga reader application, by contributing to code improvements and feature enhancements. Utilized open-source technologies and collaborated with the community to ensure a high-quality and user-friendly application.",
+    "techStack": [
+      "Tachiyomi",
+      "Open-source",
+      "Manga Reader"
+    ],
+    "bullets": [
+      "Contributed to code improvements and feature enhancements",
+      "Utilized open-source technologies for development",
+      "Collaborated with the community for a high-quality application",
+      "Ensured a user-friendly and efficient manga reading experience"
+    ]
+  },
+  "RA-L-PH/Ed": {
+    "projectName": "Ed",
+    "oneLineSummary": "Windows assistant for PC",
+    "technicalSummary": "Developed a Windows assistant application for PC",
+    "techStack": [
+      "Windows"
+    ],
+    "bullets": [
+      "Designed and implemented Windows assistant application",
+      "Ensured compatibility with various Windows versions",
+      "Developed features for user assistance and productivity"
+    ]
+  },
+  "krutibagwe/RoadScan": {
+    "projectName": "RoadScan",
+    "oneLineSummary": "React-based web application for road scanning and analysis",
+    "technicalSummary": "Built a React-based web application for road scanning and analysis using Create React App",
+    "techStack": [
+      "React",
+      "Create React App"
+    ],
+    "bullets": [
+      "Developed React-based web application for road scanning and analysis",
+      "Utilized Create React App for streamlined development and deployment",
+      "Ensured responsive design and user-friendly interface",
+      "Integrated features for road scanning and analysis"
+    ]
+  },
+  "RA-L-PH/Moneta": {
+    "projectName": "Moneta",
+    "oneLineSummary": "AI-powered personal finance tracking application with automated transaction capture and personalized financial advice",
+    "technicalSummary": "Moneta is a Flutter-based application that leverages Google's Gemini AI to provide users with tailored financial insights, budget planning, and investment recommendations. It automatically captures and categorizes transactions from banking SMS messages, offering real-time processing, duplicate prevention, and comprehensive analytics.",
+    "techStack": [
+      "Flutter",
+      "Firebase",
+      "Gemini AI",
+      "Dart"
+    ],
+    "bullets": [
+      "Automatic SMS transaction capture and categorization",
+      "AI-powered financial intelligence with personalized tips and budget planning",
+      "Comprehensive analytics with monthly reports and visual insights",
+      "Multi-bank support and real-time processing",
+      "Duplicate transaction filtering for accurate financial calculations"
+    ]
+  },
+  "RA-L-PH/just": {
+    "projectName": "just",
+    "oneLineSummary": "Simplified command runner for automated workflows",
+    "technicalSummary": "Developed a command-line interface tool to streamline workflow automation, reducing manual effort and increasing productivity",
+    "techStack": [
+      "Python",
+      "CLI",
+      "Automation"
+    ],
+    "bullets": [
+      "Designed and implemented a modular architecture for easy extension and customization",
+      "Utilized Python's subprocess module for seamless command execution",
+      "Implemented input validation and error handling for robustness"
+    ]
+  },
+  "RA-L-PH/image": {
+    "projectName": "image",
+    "oneLineSummary": "Efficient image processing and manipulation library",
+    "technicalSummary": "Created a high-performance image processing library, enabling fast and efficient image manipulation and analysis",
+    "techStack": [
+      "Python",
+      "OpenCV",
+      "Image Processing"
+    ],
+    "bullets": [
+      "Leveraged OpenCV for optimized image processing and feature detection",
+      "Developed algorithms for image filtering, resizing, and format conversion",
+      "Implemented unit tests and benchmarks for ensuring library reliability and performance"
+    ]
+  },
+  "RA-L-PH/Song-dentify": {
+    "projectName": "Song-dentify",
+    "oneLineSummary": "Developed a music identification platform with a user-friendly interface",
+    "technicalSummary": "Designed and implemented a full-stack application utilizing React, Node.js, and various APIs to identify songs and provide relevant information to users",
+    "techStack": [
+      "React",
+      "Node.js",
+      "JavaScript",
+      "API Integration"
+    ],
+    "bullets": [
+      "Created a responsive and interactive UI with React",
+      "Implemented API calls to fetch song metadata and lyrics",
+      "Developed a backend server using Node.js to handle requests and store data",
+      "Ensured cross-browser compatibility and optimized performance"
+    ]
+  },
+  "anishvkalbhor/DocPoint": {
+    "projectName": "DocPoint",
+    "oneLineSummary": "Built a fast and efficient document management system with a scalable backend",
+    "technicalSummary": "Architected and developed a high-performance document management system utilizing Node.js, Fastify, and Busboy for efficient file uploads and processing",
+    "techStack": [
+      "Node.js",
+      "Fastify",
+      "Busboy",
+      "JavaScript"
+    ],
+    "bullets": [
+      "Designed a scalable and secure backend architecture for document storage and retrieval",
+      "Implemented efficient file upload and processing mechanisms using Busboy",
+      "Ensured high-performance and low-latency data access and retrieval",
+      "Developed a robust and fault-tolerant system for handling large volumes of documents"
+    ]
+  },
+  "RA-L-PH/IntentCSS": {
+    "projectName": "IntentCSS",
+    "oneLineSummary": "Contributed to the development of IntentCSS, a CSS framework for building responsive and accessible web applications",
+    "technicalSummary": "Worked on the IntentCSS project, focusing on CSS development, testing, and documentation, to ensure a high-quality and user-friendly framework",
+    "techStack": [
+      "CSS",
+      "HTML",
+      "JavaScript"
+    ],
+    "bullets": [
+      "Developed and maintained CSS components for the IntentCSS framework, prioritizing responsiveness and accessibility",
+      "Collaborated on testing and debugging efforts, ensuring cross-browser compatibility and high-quality code",
+      "Contributed to documentation and community engagement, promoting the adoption and usage of IntentCSS"
+    ]
+  },
+  "RA-L-PH/myjslibrary": {
+    "projectName": "myjslibrary",
+    "oneLineSummary": "Created a JavaScript library for simplified development and deployment of web applications",
+    "technicalSummary": "Designed and implemented a JavaScript library, providing a set of reusable functions and utilities for web development, and ensuring ease of use and high-quality code",
+    "techStack": [
+      "JavaScript",
+      "Node.js"
+    ],
+    "bullets": [
+      "Developed a set of reusable functions and utilities for web development, prioritizing simplicity and ease of use",
+      "Implemented testing and debugging mechanisms to ensure high-quality code and reliability",
+      "Documented and maintained the library, promoting community engagement and adoption"
+    ]
+  },
+  "conanferreira123/Major": {
+    "projectName": "Major",
+    "oneLineSummary": "A local-first agentic workspace with autonomous planning and local LLMs",
+    "technicalSummary": "The project utilizes a decoupled Planner-Orchestrator-Synthesizer framework, leveraging local LLMs and a vector database for high-precision orchestration of unstructured knowledge and autonomous productivity workflows",
+    "techStack": [
+      "Python",
+      "FastAPI",
+      "React.js",
+      "NVIDIA NIM",
+      "Milvus",
+      "SQLite",
+      "Llama.cpp"
+    ],
+    "bullets": [
+      "Autonomous planning and execution of complex tasks",
+      "Local sovereignty with private vectorization and offline capability",
+      "Deep integration with data sources and productivity tools",
+      "High-end UX with real-time tool execution logs and transparent AI thought process"
+    ]
+  },
+  "RA-L-PH/Chimera-AI": {
+    "projectName": "Chimera-AI",
+    "oneLineSummary": "Chimera AI is a chatbot that combines generative AI models for a powerful conversational experience",
+    "technicalSummary": "Chimera AI integrates multiple AI models, including Gemini Pro, DeepSeek, and Llama 3, to provide a unified interface for interacting with various AI models simultaneously",
+    "techStack": [
+      "JavaScript"
+    ],
+    "bullets": [
+      "Combine multiple AI models into a single chatbot for a more powerful and versatile conversational experience",
+      "Customize the chatbot to fit specific needs and use cases",
+      "Leverage the strengths of different AI models to provide superior performance and user experiences",
+      "Utilize a comprehensive list of 50+ free AI models, including new models like OpenAI's GPT OSS 20B and Z.AI's GLM 4.5 Air"
+    ]
+  },
+  "RA-L-PH/12-python": {
+    "projectName": "12-python",
+    "oneLineSummary": "A repository containing 12 beginner-friendly Python mini projects",
+    "techStack": "Python, GitHub",
+    "bullets": [
+      "Developed a repository containing 12 beginner-friendly Python mini projects",
+      "Designed the projects to help learners practice core programming concepts, such as user input and output, conditional logic, and loops",
+      "Utilized Python to create small, practical scripts that demonstrate key concepts",
+      "Created a user-friendly interface for users to access and run the projects"
+    ]
+  },
+  "RA-L-PH/Jidoka-Test": {
+    "projectName": "Jidoka-Test",
+    "oneLineSummary": "Task Management API for a To-Do List application",
+    "techStack": "JWT, Node.js, PostgreSQL",
+    "bullets": [
+      "Developed a Task Management API for a To-Do List application",
+      "Designed the API to serve as a centralized hub for managing user identities and task data",
+      "Utilized JWT for secure authentication and authorization",
+      "Implemented a scalable architecture using Node.js and PostgreSQL"
     ]
   },
   "RA-L-PH/RA-L-PH": {
     "projectName": "RA-L-PH",
-    "oneLineSummary": "Personal portfolio showcasing technical skills and experience",
-    "technicalSummary": "Developed a personal portfolio using a range of technologies including C++, CSS3, Python, Markdown, JavaScript, TypeScript, Vercel, Netlify, Firebase, Angular.js, React, and Dart. Demonstrated expertise in multiple programming languages and frameworks.",
+    "oneLineSummary": "Contributed to various open-source projects, including extensions and eduquiz",
     "techStack": [
       "C++",
       "CSS3",
@@ -607,119 +448,388 @@
       "Markdown",
       "JavaScript",
       "TypeScript",
-      "Vercel",
-      "Netlify",
-      "Firebase",
-      "Angular.js",
-      "React",
       "Dart"
     ],
     "bullets": [
-      "Utilized C++ for building efficient and scalable applications",
-      "Implemented CSS3 for styling and layout design",
-      "Leveraged Python for data analysis and machine learning tasks",
-      "Employed Markdown for documentation and content creation",
-      "Used JavaScript and TypeScript for client-side scripting and development",
-      "Deployed applications using Vercel and Netlify",
-      "Integrated Firebase for backend services and data storage",
-      "Developed single-page applications with Angular.js and React",
-      "Utilized Dart for building cross-platform applications"
+      "Developed extensions for Chrome, including Advanced Font Changer and Inactivity Locker",
+      "Utilized various frameworks and libraries, such as React, Angular.js, and Express.js",
+      "Collaborated on open-source projects, including eduquiz, a interactive learning platform"
+    ]
+  },
+  "RA-L-PH/extensions": {
+    "projectName": "extensions",
+    "oneLineSummary": "Created Chrome extensions, including Advanced Font Changer and Inactivity Locker",
+    "techStack": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "bullets": [
+      "Designed and developed Advanced Font Changer, a Chrome extension with category-based font selection and Google Fonts integration",
+      "Implemented Inactivity Locker, a Chrome extension that detects user inactivity and locks the browser with a password-protected overlay"
     ]
   },
   "RA-L-PH/movie-book": {
     "projectName": "movie-book",
-    "oneLineSummary": "Movie and book cataloging system",
-    "technicalSummary": "Developed a movie and book cataloging system with a user-friendly interface and robust data storage. Utilized a range of technologies including C++, CSS3, Python, Markdown, JavaScript, and TypeScript.",
+    "oneLineSummary": "No information available",
+    "techStack": [],
+    "bullets": []
+  },
+  "BronilKoli/Food_Donation": {
+    "projectName": "Food_Donation",
+    "oneLineSummary": "Developed a Flask-based web application for food donation",
     "techStack": [
-      "C++",
-      "CSS3",
-      "Python",
-      "Markdown",
-      "JavaScript",
-      "TypeScript"
+      "Flask",
+      "Flask-SQLAlchemy",
+      "Flask-WTF"
     ],
     "bullets": [
-      "Designed a user-friendly interface for easy cataloging and searching",
-      "Implemented data storage and retrieval using a robust database system",
-      "Utilized C++ for building efficient and scalable applications",
-      "Implemented CSS3 for styling and layout design",
-      "Leveraged Python for data analysis and machine learning tasks",
-      "Employed Markdown for documentation and content creation",
-      "Used JavaScript and TypeScript for client-side scripting and development"
+      "Designed and developed a web application with user authentication and authorization",
+      "Implemented database migrations using Flask-Migrate and Alembic",
+      "Utilized Flask-Security-Too and bcrypt for secure password hashing"
+    ]
+  },
+  "RA-L-PH/Data-Science-Monorepo": {
+    "projectName": "Data-Science-Monorepo",
+    "oneLineSummary": "Contributed to various data science projects, including Face Mask Detection and COVID-19 Exploratory Data Analysis",
+    "techStack": [
+      "Python",
+      "Pandas",
+      "NumPy",
+      "Matplotlib",
+      "Seaborn"
+    ],
+    "bullets": [
+      "Developed a face mask detection model using Ultralytics YOLO API and OpenCV",
+      "Conducted exploratory data analysis on COVID-19 pandemic data, including trend analysis and visualization",
+      "Utilized data-driven storytelling to communicate insights and findings"
+    ]
+  },
+  "RA-L-PH/eduquiz": {
+    "projectName": "eduquiz",
+    "oneLineSummary": "Contributed to the development of EduQuiz, an open-source interactive learning platform",
+    "techStack": [
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "bullets": [
+      "Designed and developed interactive quizzes with rich media support",
+      "Implemented real-time participation and live leaderboards",
+      "Utilized collaborative question bank and performance reporting analytics"
     ]
   },
   "RA-L-PH/welcome": {
     "projectName": "welcome",
-    "oneLineSummary": "Welcome page or application",
-    "technicalSummary": "Developed a welcome page or application using a range of technologies including C++, CSS3, Python, Markdown, JavaScript, and TypeScript.",
-    "techStack": [
-      "C++",
-      "CSS3",
-      "Python",
-      "Markdown",
-      "JavaScript",
-      "TypeScript"
-    ],
+    "oneLineSummary": "No information available",
+    "techStack": [],
+    "bullets": []
+  },
+  "sanika2520/RoadScan_4": {
+    "projectName": "RoadScan_4",
+    "oneLineSummary": "Built a React-based web application for road scanning and analysis",
+    "techStack": "React, Create React App",
     "bullets": [
-      "Designed a visually appealing and user-friendly interface",
-      "Implemented a robust and efficient backend system",
-      "Utilized C++ for building efficient and scalable applications",
-      "Implemented CSS3 for styling and layout design",
-      "Leveraged Python for data analysis and machine learning tasks",
-      "Employed Markdown for documentation and content creation",
-      "Used JavaScript and TypeScript for client-side scripting and development"
+      "Developed a React-based web application for road scanning and analysis",
+      "Utilized Create React App for streamlined development and deployment",
+      "Ensured responsive design and user-friendly interface",
+      "Integrated features for road scanning and analysis"
+    ]
+  },
+  "AnsleyRebello/client": {
+    "projectName": "client",
+    "oneLineSummary": "Bootstrapped with Create React App",
+    "techStack": "React, Create React App, Node.js",
+    "bullets": [
+      "Utilized Create React App to set up a React project",
+      "Implemented available scripts for development, testing, and building",
+      "Configured the project for deployment"
+    ]
+  },
+  "joshua04d/ieeegallery": {
+    "projectName": "ieeegallery",
+    "oneLineSummary": "No summary available",
+    "techStack": "No tech stack available",
+    "bullets": []
+  },
+  "RA-L-PH/mini1": {
+    "projectName": "mini1",
+    "oneLineSummary": "Set up a minimal React project with Vite",
+    "techStack": "React, Vite, ESLint",
+    "bullets": [
+      "Set up a minimal React project with Vite",
+      "Utilized official plugins for React and HMR",
+      "Configured ESLint rules for the project"
+    ]
+  },
+  "RA-L-PH/StudyHive-css": {
+    "projectName": "StudyHive-css",
+    "oneLineSummary": "No summary available",
+    "techStack": "No tech stack available",
+    "bullets": []
+  },
+  "RA-L-PH/reflex": {
+    "projectName": "reflex",
+    "oneLineSummary": "Utilized GitHub templates for issue and pull request management",
+    "techStack": "GitHub, Issue Templates, Pull Request Templates",
+    "bullets": [
+      "Configured bug report templates with clear guidelines",
+      "Set up custom component request templates for new feature suggestions",
+      "Utilized pull request templates for streamlined code review and submission"
+    ]
+  },
+  "BronilKoli/Rotten-Fruit-Detection": {
+    "projectName": "Rotten-Fruit-Detection",
+    "oneLineSummary": "Developed a Convolutional Neural Network (CNN) for plant disease detection from leaf images",
+    "techStack": "TensorFlow, Keras, Streamlit, Python",
+    "bullets": [
+      "Developed a CNN model for plant disease detection from leaf images, utilizing TensorFlow and Keras",
+      "Implemented real-time prediction with Streamlit UI and data augmentation for improved accuracy",
+      "Ensured clean and user-friendly interface, with a focus on usability and accessibility"
+    ]
+  },
+  "RA-L-PH/drive-wa-bot": {
+    "projectName": "drive-wa-bot",
+    "oneLineSummary": "A WhatsApp bot that uploads files sent by users to their Google Drive accounts",
+    "techStack": "React, Vite, Tailwind CSS, Python, JavaScript",
+    "bullets": [
+      "* Seamless file uploads from WhatsApp to Google Drive",
+      "* Secure OAuth authentication for Google Drive integration",
+      "* User-friendly interface for easy authorization and guidance",
+      "* Fast and reliable file uploads with no manual intervention required",
+      "* Works on all devices with WhatsApp support"
+    ]
+  },
+  "RA-L-PH/Automatic-License-Plate-Recognition-using-YOLOv8": {
+    "projectName": "Automatic-License-Plate-Recognition-using-YOLOv8",
+    "oneLineSummary": "A license plate recognition system using YOLOv8 and OpenCV",
+    "techStack": "YOLOv8, OpenCV, Python, Ultralytics",
+    "bullets": [
+      "* Detects vehicles and recognizes license plates using YOLOv8 and OpenCV",
+      "* Uses a pre-trained model for license plate recognition",
+      "* Implemented in Python with Ultralytics and OpenCV libraries",
+      "* Can be used for various applications such as traffic monitoring and surveillance"
+    ]
+  },
+  "ieee-sfit/ieee-event-catalog": {
+    "projectName": "ieee-event-catalog",
+    "oneLineSummary": "An event catalog system for IEEE events",
+    "techStack": "Unknown",
+    "bullets": [
+      "* Provides a catalog of IEEE events",
+      "* Includes event details such as name, date, and location",
+      "* Unknown technology stack"
+    ]
+  },
+  "joshua04d/IEEE-battleship102": {
+    "projectName": "IEEE-battleship102",
+    "oneLineSummary": "A battleship game implementation using React and Vite",
+    "techStack": "React, Vite",
+    "bullets": [
+      "* Implements a battleship game using React and Vite",
+      "* Minimal setup for getting React working in Vite",
+      "* Uses React and Vite for the game implementation"
+    ]
+  },
+  "RA-L-PH/sort": {
+    "projectName": "sort",
+    "oneLineSummary": "A simple online and real-time tracking algorithm for 2D multiple object tracking in video sequences",
+    "techStack": "Unknown",
+    "bullets": [
+      "* Provides a simple online and real-time tracking algorithm",
+      "* Used for 2D multiple object tracking in video sequences",
+      "* Unknown technology stack"
+    ]
+  },
+  "RA-L-PH/automatic-number-plate-recognition-python-yolov8": {
+    "projectName": "automatic-number-plate-recognition-python-yolov8",
+    "oneLineSummary": "A license plate recognition system using YOLOv8 and Python",
+    "techStack": "YOLOv8, OpenCV, Python, Ultralytics",
+    "bullets": [
+      "* Detects vehicles and recognizes license plates using YOLOv8 and OpenCV",
+      "* Uses a pre-trained model for license plate recognition",
+      "* Implemented in Python with Ultralytics and OpenCV libraries",
+      "* Can be used for various applications such as traffic monitoring and surveillance"
+    ]
+  },
+  "RA-L-PH/healtify": {
+    "projectName": "healtify",
+    "oneLineSummary": "An AI-powered health assistant application built using React and Vite",
+    "techStack": "React, Vite, Google Generative AI",
+    "bullets": [
+      "* Provides a chatbot for symptom analysis and health advice",
+      "* Offers personalized medication recommendations based on user inputs",
+      "* Implemented using React, Vite, and Google Generative AI",
+      "* Aims to empower users to manage their health effectively"
+    ]
+  },
+  "RA-L-PH/ieeewie": {
+    "projectName": "ieeewie",
+    "oneLineSummary": "Unknown",
+    "techStack": "Unknown",
+    "bullets": [
+      "* Unknown project details"
+    ]
+  },
+  "shanayaac/4TH-JUNE": {
+    "projectName": "4TH-JUNE",
+    "oneLineSummary": "Developed an interactive web application for exploring the universe's history",
+    "techStack": "Flask, HTML5, CSS3, JavaScript",
+    "bullets": [
+      "Designed and implemented an interactive time slider for exploring different cosmic epochs",
+      "Developed dynamic content display with epoch descriptions and visuals",
+      "Integrated audio narration and ambient sound effects for an immersive experience",
+      "Ensured responsive design for both desktop and mobile experiences"
+    ]
+  },
+  "euphoriasportz/euphoriasportz": {
+    "projectName": "euphoriasportz",
+    "oneLineSummary": "Built a full-stack web application with React and Node.js/Express",
+    "techStack": "React, Node.js, Express.js",
+    "bullets": [
+      "Developed a user management system with display and editing capabilities",
+      "Designed and implemented a sports catalog with filtering and sorting functionality",
+      "Integrated a contact form with backend validation and handling",
+      "Ensured responsive design with glassmorphism effects"
+    ]
+  },
+  "RA-L-PH/xr-samples": {
+    "projectName": "xr-samples",
+    "oneLineSummary": "Created an Android Studio project for Android XR functionality",
+    "techStack": "Android, Gradle, Android Studio",
+    "bullets": [
+      "Developed an implementation of spatial panels for Android XR",
+      "Designed and implemented orbiters and environments for immersive experiences",
+      "Utilized the Gradle build system and Android Studio for development and testing",
+      "Ensured compatibility with the latest stable version of Android Studio"
+    ]
+  },
+  "RA-L-PH/Vision-Quest": {
+    "projectName": "Vision-Quest",
+    "oneLineSummary": "Explored the use of Transformers for spatial mapping and hand tracking",
+    "techStack": "Transformers, Hugging Face, Vision Transformers",
+    "bullets": [
+      "Researched and applied Transformers for monocular depth estimation and SLAM",
+      "Utilized the Hugging Face Transformers library for fine-tuning pre-trained models",
+      "Explored the benefits of Transformers for improved handling of complex scenes and global context",
+      "Investigated the potential for higher accuracy in depth estimation and hand tracking"
+    ]
+  },
+  "RA-L-PH/icon4win": {
+    "projectName": "icon4win",
+    "oneLineSummary": "Developed a Windows-specific application",
+    "techStack": "Windows",
+    "bullets": [
+      "Developed a Windows-specific application",
+      "Utilized Windows-specific technologies for development and testing",
+      "Ensured compatibility with various Windows versions",
+      "Designed and implemented features for user assistance and productivity"
+    ]
+  },
+  "RA-L-PH/cp": {
+    "projectName": "cp",
+    "oneLineSummary": "React + Vite template with HMR and ESLint rules for building a retro Windows 95-style website",
+    "techStack": "React, Vite, ESLint, JavaScript, HTML, CSS",
+    "bullets": [
+      "Built a retro Windows 95-style website with React + Vite",
+      "Implemented HMR and ESLint rules for fast and secure development",
+      "Utilized JavaScript, HTML, and CSS for building the website",
+      "Designed a responsive UI for a great user experience on both desktop and mobile devices"
+    ]
+  },
+  "RA-L-PH/jmh": {
+    "projectName": "jmh",
+    "oneLineSummary": "React + Vite template with HMR and ESLint rules for building a fast and secure web application",
+    "techStack": "React, Vite, ESLint, JavaScript, HTML, CSS",
+    "bullets": [
+      "Built a fast and secure web application with React + Vite",
+      "Implemented HMR and ESLint rules for fast and secure development",
+      "Utilized JavaScript, HTML, and CSS for building the web application",
+      "Designed a responsive UI for a great user experience on both desktop and mobile devices"
+    ]
+  },
+  "RA-L-PH/StudyHive": {
+    "projectName": "StudyHive",
+    "oneLineSummary": "StudyHive project with VS code, tabnine, and Codeium extensions",
+    "techStack": "VS code, tabnine, Codeium",
+    "bullets": [
+      "Set up StudyHive project with VS code, tabnine, and Codeium extensions",
+      "Utilized VS code for a comprehensive development environment",
+      "Implemented tabnine and Codeium extensions for enhanced coding experience"
+    ]
+  },
+  "RA-L-PH/RoadScan": {
+    "projectName": "RoadScan",
+    "oneLineSummary": "RoadScan project with unknown details",
+    "techStack": "Unknown",
+    "bullets": [
+      "Unknown details about the RoadScan project"
+    ]
+  },
+  "RA-L-PH/catherines": {
+    "projectName": "catherines",
+    "oneLineSummary": "Unknown details about the catherines project",
+    "techStack": "Unknown",
+    "bullets": [
+      "Unknown details about the catherines project"
+    ]
+  },
+  "RA-L-PH/html-themes": {
+    "projectName": "html-themes",
+    "oneLineSummary": "Collection of beautiful, interactive HTML overlays for special occasions",
+    "techStack": "HTML, CSS, JavaScript",
+    "bullets": [
+      "Built a collection of beautiful, interactive HTML overlays for special occasions",
+      "Utilized HTML, CSS, and JavaScript for building the overlays",
+      "Designed a responsive UI for a great user experience on both desktop and mobile devices",
+      "Implemented interactive elements such as animations and effects"
     ]
   },
   "RA-L-PH/Major": {
     "projectName": "Major",
-    "oneLineSummary": "Developed a definitive, agentic Retrieval-Augmented Generation (RAG) system for planning tool usage, web scraping, evidence scoring, and synthesizing final answers.",
-    "technicalSummary": "Built a local-first RAG pipeline with a Qwen-based manager, multi-source web tools, evidence scoring, and a Llama model for final synthesis. Implemented CPU/GPU co-existence and offloading via llama.cpp bindings.",
-    "techStack": [
-      "Python",
-      "Qwen",
-      "Llama",
-      "GPU",
-      "CPU"
-    ],
+    "oneLineSummary": "A configuration for AI behavior when interacting with Codacy's MCP Server",
+    "techStack": "Codacy, MCP Server, AI",
     "bullets": [
-      "Designed and implemented a local-first RAG pipeline with a Qwen-based manager",
-      "Integrated multi-source web tools for data collection",
-      "Developed evidence scoring and merging functionality",
-      "Implemented final synthesis using a Llama model",
-      "Optimized performance with CPU/GPU co-existence and offloading via llama.cpp bindings"
+      "Configuration for AI behavior when interacting with Codacy's MCP Server",
+      "Rules for editing files and running analysis tools",
+      "Troubleshooting steps for issues with Codacy MCP Server tools"
+    ]
+  },
+  "RA-L-PH/excalidraw": {
+    "projectName": "excalidraw",
+    "oneLineSummary": "A monorepo for a React component library and web application",
+    "techStack": "React, TypeScript, Yarn workspaces",
+    "bullets": [
+      "Monorepo with clear separation between core library and application",
+      "Uses TypeScript, React, and Yarn workspaces",
+      "Development workflow includes package development, app development, testing, and type safety"
+    ]
+  },
+  "RA-L-PH/simple-local-rag": {
+    "projectName": "simple-local-rag",
+    "oneLineSummary": "A simple local retrieval-augmented generation pipeline",
+    "techStack": "PyMuPDF, sentence transformers, transformers",
+    "bullets": [
+      "Local RAG pipeline using open-source tools",
+      "Includes PDF ingestion, embedding creation, search, and answer functionality",
+      "Designed to run locally on a NVIDIA GPU"
     ]
   },
   "RA-L-PH/lncrawl-backend": {
     "projectName": "lncrawl-backend",
-    "oneLineSummary": "No summary available",
-    "technicalSummary": "No technical summary available",
-    "techStack": [],
+    "oneLineSummary": "A backend project with no additional information",
+    "techStack": "",
     "bullets": []
   },
-  "RA-L-PH/jmh": {
-    "projectName": "jmh",
-    "oneLineSummary": "A minimal React template setup with Vite, HMR, and ESLint rules",
-    "techStack": [
-      "React",
-      "Vite",
-      "Babel",
-      "SWC",
-      "ESLint",
-      "TypeScript"
-    ],
-    "coreFeatures": [
-      {
-        "title": "React Compiler",
-        "implementation": "The React Compiler is enabled/disabled depending on the template, impacting Vite dev & build performances. It can be installed and configured according to the provided documentation."
-      },
-      {
-        "title": "Fast Refresh",
-        "implementation": "Fast Refresh is enabled using either Babel or SWC, depending on the chosen plugin (@vitejs/plugin-react or @vitejs/plugin-react-swc)."
-      },
-      {
-        "title": "ESLint Configuration",
-        "implementation": "The template includes basic ESLint rules, and recommends using TypeScript with type-aware lint rules enabled for production applications. The TS template provides guidance on integrating TypeScript and typescript-eslint."
-      }
+  "RA-L-PH/Contro": {
+    "projectName": "Contro",
+    "oneLineSummary": "Explored file structure organization using C programming language, focusing on efficient file management and Pinmode.c implementation",
+    "techStack": "C, File Structure Organization",
+    "bullets": [
+      "Investigated file structure best practices using C programming language, emphasizing readability, maintainability, and scalability",
+      "Implemented Pinmode.c, demonstrating understanding of file management principles and C programming concepts",
+      "Explored the role of file structure in software development, recognizing its impact on code quality, reusability, and collaboration",
+      "Applied problem-solving skills to optimize file organization, ensuring efficient use of system resources and improved code performance"
     ]
   }
 }
