@@ -27,11 +27,11 @@
 }
 
 :root.light {
-  --bg-color: #f8faff;
-  --text-primary: #0c0c0e;
-  --text-secondary: #4f46e5;
-  --border-color: rgba(79, 70, 229, 0.1);
-  --surface-color: rgba(79, 70, 229, 0.03);
+  --bg-color: #fcfdfe;
+  --text-primary: #09090b;
+  --text-secondary: #3f3f46;
+  --border-color: rgba(0, 0, 0, 0.06);
+  --surface-color: #ffffff;
   --accent-color: #4f46e5;
   color-scheme: light;
 }
@@ -76,9 +76,104 @@ body {
   background: var(--accent-color);
 }
 
+/* Ensure native dropdown menus respect theme colors */
+select option {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+}
+
+select:focus-visible {
+  outline: none;
+}
+
+/* Global focus override to prevent default browser outlines */
+input:focus, 
+textarea:focus, 
+select:focus, 
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 .premium-divider {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--border-color), transparent);
   border: none;
   opacity: 0.6;
+}
+/* TOGGLE SWITCH COMPONENT */
+.cl-switch {
+  position: relative;
+  display: inline-block;
+  line-height: normal;
+  vertical-align: middle;
+}
+/* Input */
+.cl-switch > input {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  z-index: -1;
+  position: absolute;
+  right: 6px;
+  top: -8px;
+  display: block;
+  margin: 0;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: var(--border-color);
+  outline: none;
+  opacity: 0;
+  transform: scale(1);
+  pointer-events: none;
+  transition: opacity 0.3s 0.1s, transform 0.2s 0.1s;
+}
+/* Track */
+.cl-switch > span::before {
+  content: "";
+  float: right;
+  display: inline-block;
+  margin: 5px 0 5px 10px;
+  border-radius: 7px;
+  width: 25px;
+  height: 10px;
+  background-color: var(--border-color);
+  vertical-align: top;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+/* Thumb */
+.cl-switch > span::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  right: 12px;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  background-color: var(--text-secondary);
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  transition: background-color 0.2s, transform 0.2s;
+}
+/* Checked */
+.cl-switch > input:checked {
+  right: -10px;
+  background-color: #f0abfc;
+}
+
+.cl-switch > input:checked + span::before {
+  background-color: #f0abfc50;
+}
+
+.cl-switch > input:checked + span::after {
+  background-color: #e879f9;
+  transform: translateX(12px);
+}
+/* Hover, Focus */
+.cl-switch:hover > input {
+  opacity: 0.04;
+}
+
+.cl-switch > input:focus {
+  opacity: 0.12;
 }

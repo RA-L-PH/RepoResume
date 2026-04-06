@@ -1,8 +1,18 @@
 const axios = require('axios');
 
 async function runIntelligenceEngine(ctx) {
-  const { userId, accessToken, repos, mode, broadcast, nvidia, cache, saveCache, job } = ctx;
+  const { userId, accessToken, repos, mode, broadcast, nvidia, cache, saveCache, job, callAI, intelModel, staticInfo } = ctx;
   const authHeaders = { Authorization: `token ${accessToken}` };
+  
+  // Helper to determine extra body based on model
+  const getExtra = (m) => {
+    if (m.includes('deepseek-v3')) return { extra_body: { chat_template_kwargs: { thinking: true } } };
+    if (m.includes('qwen3.5')) return { extra_body: { chat_template_kwargs: { enable_thinking: true } } };
+    return {};
+  };
+
+  const modelToUse = intelModel || "meta/llama-3.3-70b-instruct";
+  const extraParams = getExtra(modelToUse);
   
   try {
     job.phase = 'UNDERSTANDING_REPOS';
@@ -41,9 +51,12 @@ async function runIntelligenceEngine(ctx) {
             const docFiles = treeData.tree.filter(f => {
               const p = f.path.toLowerCase();
               const isDoc = p.endsWith('.md') || p.endsWith('.txt') || p.endsWith('.text') || p.endsWith('.markdown');
-              const isConfig = p === 'package.json' || p === 'requirements.txt' || p === 'go.mod' || p === 'cargo.toml' || p === 'pom.xml' || p === 'gemfile' || p === 'composer.json';
-              return f.type === 'blob' && (isDoc || isConfig);
-            }).slice(0, 15);
+              const isConfig = ['package.json', 'requirements.txt', 'go.mod', 'cargo.toml', 'pom.xml', 'gemfile', 'composer.json', 'dockerfile'].includes(p);
+              const isCode = (p.startsWith('src/') || p.startsWith('lib/') || p.startsWith('app/')) && 
+                             (p.endsWith('.js') || p.endsWith('.ts') || p.endsWith('.py') || p.endsWith('.go') || p.endsWith('.java')) &&
+                             !p.includes('test') && !p.includes('spec');
+              return f.type === 'blob' && (isDoc || isConfig || isCode);
+            }).slice(0, 20); // Scale up slightly to 20 files
             
             let combined = `### REPO: ${repo.name}\n- GitHub Description: ${repoInfo.description || 'No description provided'}\n- Primary Language: ${repoInfo.language || 'Unknown'}\n- Languages Used: ${languages}\n- Topics: ${(repoInfo.topics || []).join(', ')}\n\nFILE STRUCTURE:\n${treeSummary}\n`;
             
@@ -66,26 +79,29 @@ async function runIntelligenceEngine(ctx) {
 
         const docString = chunkDocs.filter(d => d).join("\n\n---\n\n");
         if (docString) {
-          const basicPrompt = `You are a Senior Technical Architect and Librarian. 
-          Extract DEEP technical summaries from these repositories based on documentation, languages, and FILE STRUCTURE.
+          const basicPrompt = `You are a Senior Technical Architect and Open Source Researcher.
+          Extract comprehensive technical summaries from these repositories based on documentation, languages, and FILE STRUCTURE.
           
           Focus on:
-          1. Architectural Complexity (e.g., Microservices clusters, Event-driven pipes, Distributed ledger).
-          2. Engineering Patterns (e.g., DDD, hexagonal architecture, Specialized algorithms, TDD/CI-CD setup).
-          3. Technical Impact (e.g., Latency optimization, Security hardening, Infrastructure-as-Code).
+          1. Architectural Design & Patterns (e.g., DDD, Microservices, Hexagonal Architecture, Design Patterns).
+          2. Engineering Implementation (e.g., Performance optimizations, Security hardening, specialized algorithms, TDD).
+          3. Technical Scope & Impact (e.g., Automated delivery, Cloud infrastructure, Developer tools, Library utilities).
+          4. UX/UI & Frontend Excellence (e.g., Accessibility, Responsive Design, State Management, Animation frameworks).
           
-          Analyze the 'FILE STRUCTURE' and 'Languages Used' to infer project requirements and codebase depth.
+          Analyze the 'FILE STRUCTURE' and 'Languages Used' to infer practical project requirements and developer skill level.
           
-          FORMAT each 'bullets' item as "Short Technical Label: Full Descriptive Achievement". 
-          Example: "SECURE ARCHITECTURE: Optimized system reliability and eliminated critical technical debt via micro-segmentation."
+          FORMAT each 'bullets' item as "Technical Context: Clear Achievement/Implementation". 
+          Example: "SCALABLE ARCHITECTURE: Optimized database queries for a distributed ledger system, reducing latency by 40%."
           
           CRITICAL: Use the EXACT 'repo.name' provided for 'projectName'. DO NOT rename. 
           Respond ONLY with JSON array 'projects': [{ projectName, oneLineSummary, technicalSummary, techStack: string[], bullets: string[] }].`;
-          const basicCompletion = await nvidia.chat.completions.create({
-            model: "meta/llama-3.3-70b-instruct",
-            messages: [{ role: "system", content: basicPrompt }, { role: "user", content: docString }],
-            response_format: { type: "json_object" }
+          if (job.status === 'STOPPED') return;
+          const basicCompletion = await callAI([{ role: "system", content: basicPrompt }, { role: "user", content: docString }], {
+            model: modelToUse,
+            response_format: { type: "json_object" },
+            ...extraParams
           });
+          if (job.status === 'STOPPED') return;
           const parsed = JSON.parse(basicCompletion.choices[0].message.content);
           const summaries = (parsed.projects || parsed.summaries || parsed || []);
           (Array.isArray(summaries) ? summaries : [summaries]).forEach(s => {
@@ -117,21 +133,30 @@ async function runIntelligenceEngine(ctx) {
 
       if (docString) {
         console.log(`\x1b[32m[INTELLIGENCE REFINER]\x1b[0m Professionalizing chunk ${chunkIndex} concurrently...`);
-        const sysPrompt = `You are a Principal Engineering Resume Strategist. 
-        RE-FRAME these project descriptions into high-impact, "Senior/Principal" level narratives.
-        - Emphasize "Lead", "Architected", "Orchestrated", and "Engineered".
+        const sysPrompt = `You are a Senior Technical Recruiter and Career Strategist. 
+        Professionalize these project descriptions into high-impact, industry-standard technical narratives.
+        - Target Seniority: ${staticInfo.seniority || 'Senior'}.
+        - Soft Skill Context (Integrate where relevant): ${staticInfo.softSkills || 'Collaboration, Problem Solving'}.
         
-        FORMAT each 'formattedFeatures' item as "CATCHY TECHNICAL TITLE: High-impact Description".
-        Example: "CLOUD-NATIVE DELIVERY: Orchestrated a multi-region deployment pipeline for 2.4k developers."
+        ### STRATEGIC GUIDELINES:
+        1. SENIORITY ALIGNMENT: 
+           - If Junior/Intern: Focus on feature delivery, codebase navigation, and tool usage.
+           - If Senior: Focus on ownership, architectural trade-offs, and mentoring signals in the code.
+           - If Staff/Principal: Focus on cross-team impact, system design, and legacy refactoring.
+        2. SOFT SKILL INJECTION: If a repo shows evidence of collaboration (e.g., complex PR history, large README teams) or leadership, highlight it.
+        3. VERB USAGE: Use high-impact verbs: "Orchestrated", "Engineered", "Optimized", "Spearheaded".
         
+        FORMAT each 'formattedFeatures' item as "TECHNICAL DOMAIN: Key Implementation Detail".
         CRITICAL: MUST KEEP the exact same 'projectName' as provided. DO NOT rename repos. 
         Respond ONLY with JSON 'projects': [{ projectName, oneLineSummary, techStack: string[], formattedFeatures: string[] }].`;
 
-        const completion = await nvidia.chat.completions.create({
-          model: "meta/llama-3.3-70b-instruct",
-          messages: [{ role: "system", content: sysPrompt }, { role: "user", content: docString }],
-          response_format: { type: "json_object" }
+        if (job.status === 'STOPPED') return;
+        const completion = await callAI([{ role: "system", content: sysPrompt }, { role: "user", content: docString }], {
+          model: modelToUse,
+          response_format: { type: "json_object" },
+          ...extraParams
         });
+        if (job.status === 'STOPPED') return;
         
         const parsed = JSON.parse(completion.choices[0].message.content);
         const summaries = (parsed.projects || parsed.summaries || parsed || []);
@@ -144,14 +169,26 @@ async function runIntelligenceEngine(ctx) {
     // Phase: Global Portfolio Synthesis
     job.phase = 'CONSOLIDATING';
     broadcast(userId, { type: 'PHASE_CHANGE', phase: 'CONSOLIDATING' });
+    
+    console.log(`\x1b[32m[PORTFOLIO CONSOLIDATOR]\x1b[0m Reframing entire career identity for ${staticInfo.seniority || 'Senior'} level...`);
+    const consSysPrompt = `You are an AI Portfolio Strategist specializing in ${staticInfo.seniority || 'Senior'} Engineering careers. 
+    Consolidate these technical projects into a unified technical profile. 
+    - Integration Goal: Combine the raw technical evidence with the candidate's reported Soft Skills: [${staticInfo.softSkills || ''}].
+    - Seniority Focus: ${staticInfo.seniority || 'Senior'}.
+    
+    ### FORMAT RULES:
+    1. 'unifiedSummary': A powerful, executive-style summary (3-4 sentences) that bridges the technical breadth of the repos with the candidate's professional seniority.
+    2. 'refinedProjects': The top 3-5 projects reframed to show architectural maturity.
+    
+    Respond ONLY with JSON: { unifiedSummary: string, refinedProjects: [{projectName, oneLineSummary, techStack: string[], formattedFeatures: string[] }] }.`;
 
-    const consSysPrompt = `You are an AI Portfolio Strategist. Consolidate these technical projects into a unified technical profile. Focus on core architectural strengths and technical diversity. Respond ONLY with JSON: { unifiedSummary: string, refinedProjects: [{projectName, oneLineSummary, techStack: string[], formattedFeatures: string[] }] }.`;
-
-    const consCompletion = await nvidia.chat.completions.create({
-      model: "meta/llama-3.3-70b-instruct",
-      messages: [{ role: "system", content: consSysPrompt }, { role: "user", content: JSON.stringify(job.results) }],
-      response_format: { type: "json_object" }
+    if (job.status === 'STOPPED') return;
+    const consCompletion = await callAI([{ role: "system", content: consSysPrompt }, { role: "user", content: JSON.stringify(job.results) }], {
+      model: modelToUse,
+      response_format: { type: "json_object" },
+      ...extraParams
     });
+    if (job.status === 'STOPPED') return;
     
     job.consolidated = JSON.parse(consCompletion.choices[0].message.content);
     broadcast(userId, { type: 'CONSOLIDATED', mode: 'intelligence', data: job.consolidated });

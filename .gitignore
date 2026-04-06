@@ -7,3 +7,6 @@ build/
 client/dist/
 backend/.env
 package-lock.json
+
+sessions.db
+reporesume.db

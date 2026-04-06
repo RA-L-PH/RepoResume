@@ -2,11 +2,15 @@
   "name": "reporesume-root",
   "version": "1.0.0",
   "scripts": {
-    "start:server": "cd server && node index.js",
+    "start:server": "cd server && node --watch index.js",
     "start:client": "cd client && npm run dev",
     "dev": "concurrently \"npm run start:server\" \"npm run start:client\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "zod": "^4.3.6",
+    "zustand": "^5.0.12"
   }
 }

@@ -1,125 +1,109 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import { Loader2 } from 'lucide-react'
+import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster, toast } from 'react-hot-toast'
 
-// Components
+
 // Pages
 import { Login } from './pages/Login'
 import { Explorer } from './pages/Explorer'
 import { ResumeMaker } from './pages/ResumeMaker'
+import { CoverLetter } from './pages/CoverLetter'
 
-const BACKEND_URL = 'http://localhost:3001'
-axios.defaults.withCredentials = true
-
-interface Repository {
-  id: number
-  name: string
-  description: string
-  full_name: string
-  updated_at: string
-}
-interface EduEntry { degree: string; institution: string; period: string }
-interface ExpEntry { role: string; company: string; period: string; description: string }
-interface CertEntry { name: string; issuer: string; date: string }
-
-const PHASES_MAP: any = {
-  'UNDERSTANDING_REPOS': 'Analyzing Repository Graph...',
-  'SELECTING_PROJECTS': 'Orchestrating Project Portfolio...',
-  'SUMMARIZING_CONTENT': 'Synthesizing Architectural Narratives...',
-  'REFINING_EXPERIENCE': 'Vectorizing Impact Bullet Points...',
-  'CREATING_DESCRIPTIONS': 'Forging Technical Project Blocks...',
-  'GENERATING_NARRATIVE': 'Drafting Professional Engineering Narrative...',
-  'CONSOLIDATING': 'Strategizing Content...',
-  'idle': 'Initializing Engine...'
-};
+// Store
+import { useStore } from './store'
 
 export default function App() {
-  const [user, setUser] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
-  const [repos, setRepos] = useState<Repository[]>([])
-  const [search, setSearch] = useState('')
-  const [jobProfile, setJobProfile] = useState({ title: '', description: '' })
-  const [staticInfo, setStaticInfo] = useState({
-    name: '', email: '', links: '', education: '', certifications: '', jobHistory: ''
-  })
-  const [selectedRepoIds, setSelectedRepoIds] = useState<Set<number>>(new Set())
-  const [bulkProgress, setBulkProgress] = useState({ current: 0, total: 0, phase: 'idle' })
-  const [markdownResume, setMarkdownResume] = useState('')
-  const [sseConnected, setSseConnected] = useState(false)
-  const [isIntelligenceRunning, setIsIntelligenceRunning] = useState(false)
-  const [isResumeRunning, setIsResumeRunning] = useState(false)
-  const [intelligenceResults, setIntelligenceResults] = useState<any>(null)
-  const [eduList, setEduList] = useState<EduEntry[]>([{ degree: '', institution: '', period: '' }])
-  const [expList, setExpList] = useState<ExpEntry[]>([{ role: '', company: '', period: '', description: '' }])
-  const [certList, setCertList] = useState<CertEntry[]>([{ name: '', issuer: '', date: '' }])
-  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    return (localStorage.getItem('repo-resume-theme') as 'light' | 'dark') || 'dark';
-  });
+  const user = useStore(s => s.user)
+  const checkAuth = useStore(s => s.checkAuth)
+  const setSseConnected = useStore(s => s.setSseConnected)
+  const setIsIntelligenceRunning = useStore(s => s.setIsIntelligenceRunning)
+  const setIsResumeRunning = useStore(s => s.setIsResumeRunning)
+  const setIsCoverLetterRunning = useStore(s => s.setIsCoverLetterRunning)
+  const setCurrentMarkdown = useStore(s => s.setCurrentMarkdown)
+  const setCurrentCoverLetter = useStore(s => s.setCurrentCoverLetter)
+  const setBulkProgress = useStore(s => s.setBulkProgress)
+  const setIntelligenceResults = useStore(s => s.setIntelligenceResults)
+  const theme = useStore(s => s.theme)
+  const BACKEND_URL = useStore(s => s.BACKEND_URL)
+  const setTheme = useStore(s => s.setTheme)
 
-  const toggleTheme = () => {
-    toast.dismiss();
-    const next = theme === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-    toast.success(`Engine Mode: ${next.toUpperCase()}`, { position: 'bottom-center', duration: 1500 });
-  };
-
-  useEffect(() => {
-    localStorage.setItem('repo-resume-theme', theme);
-  }, [theme]);
-
-  useEffect(() => {
-    const root = window.document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-      root.classList.remove('light');
-    } else {
-      root.classList.add('light');
-      root.classList.remove('dark');
-    }
-  }, [theme]);
-
-  useEffect(() => { checkAuth() }, [])
+  useEffect(() => { 
+    checkAuth() 
+  }, [checkAuth])
 
   useEffect(() => {
     if (user) {
       const eventSource = new EventSource(`${BACKEND_URL}/api/stream`, { withCredentials: true })
-      eventSource.onopen = () => { console.log("SSE Connection Established"); setSseConnected(true); }
-      eventSource.onerror = (err) => { 
-        console.error("SSE Connection Error", err); 
-        setSseConnected(false); 
-        eventSource.close();
-        setTimeout(() => checkAuth(), 3000); 
+      
+      eventSource.onopen = () => { 
+        console.log("SSE Connection Established")
+        setSseConnected(true) 
       }
+      
+      eventSource.onerror = (err) => { 
+        console.error("SSE Connection Error", err)
+        setSseConnected(false) 
+        eventSource.close()
+        setTimeout(() => checkAuth(), 3000) 
+      }
+      
       eventSource.onmessage = (e) => {
         const data = JSON.parse(e.data)
         switch(data.type) {
-           case 'RECOVERY':
-             const s = data.state
-             if (s.mode === 'intelligence') {
-               setIsIntelligenceRunning(s.status === 'RUNNING')
-               if (s.consolidated) setIntelligenceResults(s.consolidated)
-             } else {
-               setIsResumeRunning(s.status === 'RUNNING')
-               if (s.markdown) setMarkdownResume(s.markdown)
-             }
-             break
+            case 'RECOVERY':
+              const s = data.state
+              console.log(`\x1b[35m[SSE RECOVERY]\x1b[0m Job: ${s.id} | Status: ${s.status} | Progress: ${s.currentChunk}/${s.totalChunks}`);
+              if (s.mode === 'intelligence') {
+                setIsIntelligenceRunning(s.status === 'RUNNING')
+                if (s.consolidated) setIntelligenceResults(s.consolidated)
+              } else if (s.mode === 'cover-letter') {
+                setIsCoverLetterRunning(s.status === 'RUNNING')
+                if (s.markdown) setCurrentCoverLetter(s.markdown)
+                else setCurrentCoverLetter('')
+              } else {
+                setIsResumeRunning(s.status === 'RUNNING')
+                if (s.markdown) setCurrentMarkdown(s.markdown)
+                else setCurrentMarkdown('')
+                if (s.totalChunks) setBulkProgress({ ...useStore.getState().bulkProgress, current: s.currentChunk || 0, total: s.totalChunks, phase: s.phase || 'Recovering...' })
+              }
+              break
            case 'START':
              if (data.job.mode === 'intelligence') {
                 setIsIntelligenceRunning(true)
                 setIntelligenceResults(null)
+             } else if (data.job.mode === 'cover-letter') {
+                setIsCoverLetterRunning(true)
+                setCurrentCoverLetter('')
              } else {
                 setIsResumeRunning(true)
+                setCurrentMarkdown('')
              }
-             setMarkdownResume('');
-             setBulkProgress({ current: 0, total: data.job.totalChunks, phase: 'initializing' })
+             setBulkProgress({ current: 0, total: data.job.totalChunks, phase: 'idle' })
              break
+           case 'RECOVERY':
+              if (data.state.status === 'RUNNING') {
+                if (data.state.id.includes(':intelligence')) setIsIntelligenceRunning(true)
+                else if (data.state.id.includes(':cover-letter')) setIsCoverLetterRunning(true)
+                else setIsResumeRunning(true)
+                setBulkProgress({ 
+                   current: data.state.currentChunk || 0, 
+                   total: data.state.totalChunks || 0, 
+                   phase: data.state.phase || 'idle' 
+                })
+              }
+              break
            case 'PHASE_CHANGE':
-             setBulkProgress(prev => ({ ...prev, phase: data.phase }))
+             setBulkProgress({ ...useStore.getState().bulkProgress, phase: data.phase })
              break
            case 'MD_CHUNK':
-             setMarkdownResume(prev => prev + data.chunk)
+             if (data.mode === 'cover-letter') {
+                setCurrentCoverLetter((prev: string) => prev + data.chunk)
+             } else {
+                setCurrentMarkdown((prev: string) => prev + data.chunk)
+             }
+             break
+           case 'CHUNK_COMPLETE':
+             setBulkProgress({ ...useStore.getState().bulkProgress, current: data.index, total: data.total })
              break
             case 'CONSOLIDATED':
               if (data.mode === 'intelligence' && (data.data.refinedProjects || data.data.projects)) {
@@ -127,127 +111,49 @@ export default function App() {
               }
               break
             case 'COMPLETE':
-               if (data.markdown) setMarkdownResume(data.markdown)
+               if (data.markdown) {
+                  if (data.mode === 'cover-letter') setCurrentCoverLetter(data.markdown)
+                  else setCurrentMarkdown(data.markdown)
+               }
                if (data.mode === 'intelligence' && data.data) {
                   setIntelligenceResults(data.data)
                }
                setIsResumeRunning(false)
                setIsIntelligenceRunning(false)
+               setIsCoverLetterRunning(false)
+               toast.success("Job Synchronized Successfully")
                break
            case 'ERROR':
-             setIsIntelligenceRunning(false); setIsResumeRunning(false); alert(data.error); break
+             setIsIntelligenceRunning(false)
+             setIsResumeRunning(false)
+             setIsCoverLetterRunning(false)
+             toast.error(data.error)
+             break
         }
       }
       return () => eventSource.close()
     }
-  }, [user])
+  }, [user, BACKEND_URL, checkAuth, setSseConnected, setIsIntelligenceRunning, setIsResumeRunning, setIsCoverLetterRunning, setCurrentMarkdown, setCurrentCoverLetter, setBulkProgress, setIntelligenceResults])
 
-  const checkAuth = async () => {
-    try {
-      const { data } = await axios.get(`${BACKEND_URL}/auth/me`)
-      setUser(data); 
-      if (data.profile && Object.keys(data.profile).length > 0) {
-        const { eduList: savedEdu, expList: savedExp, certList: savedCert, ...savedStatic } = data.profile;
-        if (Object.keys(savedStatic).length > 0) setStaticInfo(prev => ({ ...prev, ...savedStatic }));
-        if (savedEdu?.length) setEduList(savedEdu);
-        if (savedExp?.length) setExpList(savedExp);
-        if (savedCert?.length) setCertList(savedCert);
-      }
-      fetchRepos();
-    } catch (err) { setUser(null) } finally { setLoading(false) }
-  }
-
-  const saveProfile = async () => {
-    try {
-      await axios.post(`${BACKEND_URL}/api/profile`, { ...staticInfo, eduList, expList, certList })
-      toast.success("Career Intelligence Saved Permanently!");
-    } catch (err) { toast.error("Failed to save profile") }
-  }
-
-  const fetchRepos = async (force = false) => {
-    if (!force) {
-      const cached = localStorage.getItem('repo_cache')
-      if (cached) {
-        setRepos(JSON.parse(cached))
-        return
-      }
+  useEffect(() => {
+    const root = window.document.documentElement
+    if (theme === 'dark') {
+      root.classList.add('dark')
+      root.classList.remove('light')
+      root.style.colorScheme = 'dark'
+    } else {
+      root.classList.add('light')
+      root.classList.remove('dark')
+      root.style.colorScheme = 'light'
     }
-    try {
-      const { data } = await axios.get(`${BACKEND_URL}/api/repos${force ? '?refresh=true' : ''}`)
-      setRepos(data)
-      localStorage.setItem('repo_cache', JSON.stringify(data))
-    } catch (err) { console.error("Fetch repos failed") }
-  }
-
-  const handleLogout = async () => {
-    await axios.post(`${BACKEND_URL}/auth/logout`)
-    setUser(null); setRepos([])
-  }
-
-  const startResumeJob = async (mode: 'resume' | 'intelligence' = 'resume') => {
-    const reposToAnalyze = selectedRepoIds.size === 0
-      ? [] 
-      : repos.filter(r => selectedRepoIds.has(r.id))
-    const enrichedStaticInfo = {
-      ...staticInfo,
-      education: eduList.filter(e => e.degree || e.institution).map(e => `${e.degree} | ${e.institution} | ${e.period}`).join('\n'),
-      certifications: certList.filter(c => c.name).map(c => `${c.name} | ${c.issuer} | ${c.date}`).join('\n'),
-      jobHistory: expList.filter(e => e.role || e.company).map(e => `${e.role} | ${e.company} | ${e.period}${e.description ? ' | ' + e.description : ''}`).join('\n'),
-    }
-    try {
-      const endpoint = mode === 'intelligence' ? '/api/analyze-intelligence' : '/api/generate-resume';
-      const payload = mode === 'intelligence' 
-        ? { repos: reposToAnalyze, mode }
-        : { repos: reposToAnalyze, jobProfile, staticInfo: enrichedStaticInfo, mode };
-      await axios.post(`${BACKEND_URL}${endpoint}`, payload)
-    } catch (err: any) { toast.error("Failed to start job") }
-  }
-
-  const toggleRepoSelection = (id: number) => {
-    const next = new Set(selectedRepoIds)
-    if (next.has(id)) next.delete(id); else next.add(id)
-    setSelectedRepoIds(next)
-  }
-
-  const copyStructuredToClipboard = () => {
-    let text = `GLOBAL CAREER INTELLIGENCE:\n"${intelligenceResults?.unifiedSummary || ''}"\n\n`;
-    text += `PROJECT HIGHLIGHTS:\n${'='.repeat(20)}\n\n`;
-    (intelligenceResults?.refinedProjects || intelligenceResults?.projects || []).forEach((r: any) => {
-      text += `${r.projectName || r.name}\n`;
-      text += `Summary: ${r.oneLineSummary || ''}\n`;
-      text += `Technologies: ${(r.techStack || []).join(', ')}\n\n`;
-      if (r.formattedFeatures) {
-        text += `Key Features & Implementation:\n`;
-        (r.formattedFeatures || []).forEach((f: string) => text += `  · ${f}\n`);
-      }
-      text += `\n\n`;
-    });
-    navigator.clipboard.writeText(text);
-    toast.success('Career History Copied to Clipboard!');
-  }
-
-  if (loading) return <div className="h-screen bg-[#0c0c0e] flex items-center justify-center"><Loader2 className="animate-spin text-indigo-500" /></div>
-
-  const explorerProps = {
-    user, repos, selectedRepoIds, toggleRepoSelection, isIntelligenceRunning, 
-    intelligenceResults, bulkProgress, PHASES_MAP, handleLogout, fetchRepos, 
-    startResumeJob, search, setSearch, setSelectedRepoIds, copyStructuredToClipboard,
-    theme, toggleTheme
-  };
-
-  const resumeProps = {
-    user, handleLogout, staticInfo, setStaticInfo, jobProfile, setJobProfile, 
-    eduList, setEduList, certList, setCertList, expList, setExpList, 
-    saveProfile, startResumeJob, isResumeRunning, markdownResume, 
-    sseConnected, bulkProgress, PHASES_MAP, theme, toggleTheme, BACKEND_URL
-  };
+  }, [theme])
 
   return (
-    <div className="relative min-h-screen text-primary overflow-hidden transition-colors duration-300">
+    <div className="relative min-h-screen text-primary overflow-hidden transition-colors duration-300 bg-bg-color">
       <Toaster 
         position="bottom-center"
         toastOptions={{
-          duration: 1500,
+          duration: 3000,
           style: {
             background: theme === 'dark' ? 'rgba(12, 12, 14, 0.95)' : '#ffffff',
             color: theme === 'dark' ? '#ffffff' : '#0c0c0e',
@@ -268,15 +174,19 @@ export default function App() {
             <Route path="/" element={<Navigate to="/explorer" />} />
             <Route 
               path="/login" 
-              element={user ? <Navigate to="/explorer" /> : <Login BACKEND_URL={BACKEND_URL} theme={theme} toggleTheme={toggleTheme} />} 
+              element={user ? <Navigate to="/explorer" /> : <Login BACKEND_URL={BACKEND_URL} theme={theme} toggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')} />} 
             />
             <Route 
               path="/explorer" 
-              element={!user ? <Navigate to="/login" /> : <Explorer {...explorerProps} />} 
+              element={!user ? <Navigate to="/login" /> : <Explorer />} 
             />
             <Route 
               path="/resume" 
-              element={!user ? <Navigate to="/login" /> : <ResumeMaker {...resumeProps} />} 
+              element={!user ? <Navigate to="/login" /> : <ResumeMaker />} 
+            />
+            <Route 
+              path="/cover-letter" 
+              element={!user ? <Navigate to="/login" /> : <CoverLetter />} 
             />
           </Routes>
         </div>

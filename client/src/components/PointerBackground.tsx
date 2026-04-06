@@ -1,4 +1,5 @@
 import { useEffect, useRef, useMemo } from 'react'
+import { cn } from '../utils/cn'
 
 export function PointerBackground({ theme = 'dark' }: { theme?: 'light' | 'dark' }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -169,7 +170,7 @@ export function PointerBackground({ theme = 'dark' }: { theme?: 'light' | 'dark'
   }, [colors, theme]);
 
   return (
-    <div className="fixed inset-0 z-0 bg-[#0c0c0e] overflow-hidden pointer-events-none">
+    <div className={cn("fixed inset-0 z-0 overflow-hidden pointer-events-none", theme === 'dark' ? "bg-[#0c0c0e]" : "bg-white")}>
       <canvas ref={canvasRef} className="block w-full h-full" />
     </div>
   );
