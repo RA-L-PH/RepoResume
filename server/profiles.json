@@ -8,7 +8,7 @@
     "jobHistory": "Webmaster | IEEE SFIT Student Branch\nMumbai, MH\nJuly 2023– May 2025\n• Leadership: Acted as the primary technical point of contact for stakeholders, gathering feedback to drive a full\nwebpage revamp that significantly improved user engagement.\n• Teamwork: Collaborated closely with a multi-person development team to review design changes and ensure\nseamless application of new features.\n• Technical Execution: Integrated backend processes using Apps Script to manage organizational information\neffectively.\nWeb Developer | Euphoria Sportz Turf\nVirar, MH\nApril 2020– June 2024\n• Project Ownership: Managed the end-to-end development lifecycle, serving as the sole client-facing represen\ntative from initial consultation to deployment.\n• Problem Solving: Identified usability gaps and proactively designed new web-based interactions to enhance user\nretention and value.\n• UI Development: Led a complete front-end revamp using HTML, CSS, and JS, currently transitioning to React\nto further optimize performance",
     "eduList": [
       {
-        "degree": "BTech in IT",
+        "degree": "B.E. in IT",
         "institution": "Mumbai University",
         "period": "2022 - Present"
       },
@@ -32,6 +32,12 @@
         "description": "• Project Ownership: Managed the end-to-end development lifecycle, serving as the sole client-facing represen\ntative from initial consultation to deployment.\n• Problem Solving: Identified usability gaps and proactively designed new web-based interactions to enhance user\nretention and value.\n• UI Development: Led a complete front-end revamp using HTML, CSS, and JS, currently transitioning to React\nto further optimize performance."
       }
     ],
-    "certList": []
+    "certList": [
+      {
+        "name": "",
+        "issuer": "",
+        "date": ""
+      }
+    ]
   }
 }

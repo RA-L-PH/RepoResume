@@ -186,7 +186,9 @@ Respond ONLY with JSON array 'projects': [{projectName, oneLineSummary, technica
        - Focus on architectural leadership, technical depth, and delivery impact.
        - Use action verbs and technical keywords found in the project data.
        - !!! CRITICAL !!!: DO NOT INCLUDE ANY SKILLS that are not present in the input.
-    3. EXTRACT a curated "Technical Portfolio" of skills (Languages, Frameworks, Architecture, Tools) found ONLY in the input.
+    3. EXTRACT a curated "Technical Portfolio" of skills (Languages, Frameworks, Architecture, Tools).
+       - !!! MANDATORY !!!: This list MUST be derived ONLY from the 'techStack' of the projects you SELECTED in step 1.
+       - Do NOT include skills from projects that were in the input but not selected for the final resume.
 
     JD Context (FOR TONE ONLY): ${jobProfile.description}
 

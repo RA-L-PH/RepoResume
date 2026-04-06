@@ -185,8 +185,8 @@ export default function App() {
   }
 
   const startResumeJob = async (mode: 'resume' | 'intelligence' = 'resume') => {
-    const reposToAnalyze = (mode === 'resume' || selectedRepoIds.size === 0)
-      ? repos
+    const reposToAnalyze = selectedRepoIds.size === 0
+      ? [] 
       : repos.filter(r => selectedRepoIds.has(r.id))
     const enrichedStaticInfo = {
       ...staticInfo,
