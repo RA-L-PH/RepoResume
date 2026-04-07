@@ -123,14 +123,22 @@ export function Explorer() {
                      )}>
                         {isSelected && <Check size={10} className="text-white fill-white" />}
                      </div>
-                     <div className="flex-1 min-w-0">
-                        <div className={cn("font-bold text-xs truncate transition-colors", isSelected ? "text-primary" : "text-primary/60 group-hover:text-primary")}>
-                          {repo.name}
-                        </div>
-                        <div className="text-[8px] font-black uppercase tracking-widest text-secondary/40 mt-0.5">
-                          {repo.full_name.split('/')[0]}
-                        </div>
-                     </div>
+                      <div className="flex-1 min-w-0 text-left">
+                         <div className="flex items-center gap-2">
+                            <div className={cn("font-bold text-xs truncate transition-colors", isSelected ? "text-primary" : "text-primary/60 group-hover:text-primary")}>
+                              {repo.name}
+                            </div>
+                            <span className={cn(
+                               "text-[6px] px-1 rounded font-black uppercase tracking-widest leading-normal",
+                               repo.private ? "bg-amber-500/10 text-amber-500 border border-amber-500/20" : "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
+                            )}>
+                               {repo.private ? 'Private' : 'Public'}
+                            </span>
+                         </div>
+                         <div className="text-[8px] font-black uppercase tracking-widest text-secondary/40 mt-0.5">
+                           {repo.full_name.split('/')[0]}
+                         </div>
+                      </div>
                   </button>
                 );
               })}

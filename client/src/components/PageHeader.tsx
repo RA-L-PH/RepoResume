@@ -39,10 +39,11 @@ export function PageHeader() {
               <span className="text-sm font-black italic tracking-tighter text-primary group-hover:text-indigo-400 transition-colors">Repo<span className="text-indigo-500">Resume</span></span>
            </Link>
 
-           <div className="flex items-center gap-8 pl-6 h-6 border-l border-border-color">
-              <Link to="/explorer" className={cn("text-[9px] font-black italic tracking-widest uppercase transition-all", activeView === 'explorer' ? "text-indigo-400" : "text-secondary hover:text-primary")}>Intelligence</Link>
-              <Link to="/resume" className={cn("text-[9px] font-black italic tracking-widest uppercase transition-all", activeView === 'resume' ? "text-indigo-400" : "text-secondary hover:text-primary")}>Architect</Link>
-              <Link to="/cover-letter" className={cn("text-[9px] font-black italic tracking-widest uppercase transition-all", activeView === 'cover-letter' ? "text-indigo-400" : "text-secondary hover:text-primary")}>Narrative</Link>
+           <div className="flex items-center gap-8 pl-6 h-6 border-l border-border-color/30">
+              <Link to="/explorer" className={cn("text-[8px] font-black italic tracking-widest uppercase transition-all", activeView === 'explorer' ? "text-indigo-400" : "text-secondary hover:text-primary")}>Intelligence</Link>
+              <Link to="/resume" className={cn("text-[8px] font-black italic tracking-widest uppercase transition-all", activeView === 'resume' ? "text-indigo-400" : "text-secondary hover:text-primary")}>Architect</Link>
+              <Link to="/cover-letter" className={cn("text-[8px] font-black italic tracking-widest uppercase transition-all", activeView === 'cover-letter' ? "text-indigo-400" : "text-secondary hover:text-primary")}>Narrative</Link>
+              <Link to="/linkedin-post" className={cn("text-[8px] font-black italic tracking-widest uppercase transition-all", activeView === 'linkedin-post' ? "text-blue-400" : "text-secondary hover:text-primary")}>Social</Link>
            </div>
         </div>
         <div className="flex items-center gap-6">

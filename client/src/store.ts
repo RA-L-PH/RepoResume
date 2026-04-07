@@ -10,6 +10,8 @@ export interface Repository {
   description: string
   full_name: string
   updated_at: string
+  private: boolean
+  html_url: string
 }
 
 export interface EduEntry { degree: string; institution: string; period: string }
@@ -29,8 +31,10 @@ interface AppState {
   bulkProgress: { current: number; total: number; phase: string }
   markdownResume: { [jobId: string]: string } // Store resume by job ID if needed, but for now simple
   isCoverLetterRunning: boolean
+  isLinkedInRunning: boolean
   currentMarkdown: string
   currentCoverLetter: string
+  currentLinkedInPost: string
   sseConnected: boolean
   isIntelligenceRunning: boolean
   isResumeRunning: boolean
@@ -55,10 +59,12 @@ interface AppState {
   setBulkProgress: (progress: any) => void
   setCurrentMarkdown: (md: string | ((prev: string) => string)) => void
   setCurrentCoverLetter: (md: string | ((prev: string) => string)) => void
+  setCurrentLinkedInPost: (md: string | ((prev: string) => string)) => void
   setSseConnected: (status: boolean) => void
   setIsIntelligenceRunning: (status: boolean) => void
   setIsResumeRunning: (status: boolean) => void
   setIsCoverLetterRunning: (status: boolean) => void
+  setIsLinkedInRunning: (status: boolean) => void
   setIntelligenceResults: (res: any) => void
   setTheme: (theme: 'light' | 'dark') => void
   setIntelModel: (model: string) => void
@@ -70,6 +76,7 @@ interface AppState {
   saveProfile: () => Promise<void>
   startResumeJob: (mode?: 'resume' | 'intelligence') => Promise<void>
   startCoverLetterJob: () => Promise<void>
+  startLinkedInPostJob: () => Promise<void>
   stopResumeJob: (mode?: string) => Promise<void>
 }
 
@@ -86,11 +93,13 @@ export const useStore = create<AppState>((set, get) => ({
   bulkProgress: { current: 0, total: 0, phase: 'idle' },
   currentMarkdown: '',
   currentCoverLetter: '',
+  currentLinkedInPost: '',
   markdownResume: {},
   sseConnected: false,
   isIntelligenceRunning: false,
   isResumeRunning: false,
   isCoverLetterRunning: false,
+  isLinkedInRunning: false,
   intelligenceResults: null,
   theme: (localStorage.getItem('repo-resume-theme') as 'light' | 'dark') || 'dark',
   intelModel: 'meta/llama-3.3-70b-instruct',
@@ -138,9 +147,17 @@ export const useStore = create<AppState>((set, get) => ({
       set({ currentCoverLetter: md })
     }
   },
+  setCurrentLinkedInPost: (md) => {
+    if (typeof md === 'function') {
+      set({ currentLinkedInPost: md(get().currentLinkedInPost) })
+    } else {
+      set({ currentLinkedInPost: md })
+    }
+  },
   setIsIntelligenceRunning: (isIntelligenceRunning) => set({ isIntelligenceRunning }),
   setIsResumeRunning: (isResumeRunning) => set({ isResumeRunning }),
   setIsCoverLetterRunning: (isCoverLetterRunning) => set({ isCoverLetterRunning }),
+  setIsLinkedInRunning: (isLinkedInRunning) => set({ isLinkedInRunning }),
   setIntelligenceResults: (intelligenceResults) => set({ intelligenceResults }),
   setTheme: (theme) => set({ theme }),
   setIntelModel: (intelModel) => set({ intelModel }),
@@ -239,11 +256,36 @@ export const useStore = create<AppState>((set, get) => ({
     }
   },
 
-  stopResumeJob: async (mode = 'resume') => {
+  startLinkedInPostJob: async () => {
+    const { repos, selectedRepoIds, jobProfile, staticInfo, BACKEND_URL, resumeModel, humanize, eduList, expList, certList } = get()
+    const reposToAnalyze = selectedRepoIds.size === 0 ? [] : repos.filter(r => selectedRepoIds.has(r.id))
+    const enrichedStaticInfo = {
+      ...staticInfo,
+      softSkills: staticInfo.softSkills || 'Not specified',
+      education: eduList.filter(e => e.degree || e.institution).map(e => `${e.degree} | ${e.institution} | ${e.period}`).join('\n'),
+      certifications: certList.filter(c => c.name).map(c => `${c.name} | ${c.issuer} | ${c.date}`).join('\n'),
+      jobHistory: expList.filter(e => e.role || e.company).map(e => `${e.role} | ${e.company} | ${e.period}${e.description ? ' | ' + e.description : ''}`).join('\n'),
+    }
+    try {
+      set({ isLinkedInRunning: true, currentLinkedInPost: '' })
+      await axios.post(`${BACKEND_URL}/api/generate-linkedin-post`, { 
+        repos: reposToAnalyze, 
+        jobProfile, 
+        staticInfo: enrichedStaticInfo, 
+        resumeModel, 
+        humanize 
+      })
+    } catch (err: any) { 
+      set({ isLinkedInRunning: false })
+      toast.error("Failed to start LinkedIn post job") 
+    }
+  },
+
+  stopResumeJob: async () => {
     const { BACKEND_URL } = get()
     try {
       await axios.post(`${BACKEND_URL}/api/stop-resume`)
-      set({ isResumeRunning: false, isIntelligenceRunning: false, isCoverLetterRunning: false })
+      set({ isResumeRunning: false, isIntelligenceRunning: false, isCoverLetterRunning: false, isLinkedInRunning: false })
       toast.success("Synthesis Termination Sent")
     } catch (err) {
       toast.error("Stop Command Failed")

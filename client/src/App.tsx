@@ -8,6 +8,7 @@ import { Login } from './pages/Login'
 import { Explorer } from './pages/Explorer'
 import { ResumeMaker } from './pages/ResumeMaker'
 import { CoverLetter } from './pages/CoverLetter'
+import { LinkedInPost } from './pages/LinkedInPost'
 
 // Store
 import { useStore } from './store'
@@ -19,8 +20,10 @@ export default function App() {
   const setIsIntelligenceRunning = useStore(s => s.setIsIntelligenceRunning)
   const setIsResumeRunning = useStore(s => s.setIsResumeRunning)
   const setIsCoverLetterRunning = useStore(s => s.setIsCoverLetterRunning)
+  const setIsLinkedInRunning = useStore(s => s.setIsLinkedInRunning)
   const setCurrentMarkdown = useStore(s => s.setCurrentMarkdown)
   const setCurrentCoverLetter = useStore(s => s.setCurrentCoverLetter)
+  const setCurrentLinkedInPost = useStore(s => s.setCurrentLinkedInPost)
   const setBulkProgress = useStore(s => s.setBulkProgress)
   const setIntelligenceResults = useStore(s => s.setIntelligenceResults)
   const theme = useStore(s => s.theme)
@@ -60,6 +63,10 @@ export default function App() {
                 setIsCoverLetterRunning(s.status === 'RUNNING')
                 if (s.markdown) setCurrentCoverLetter(s.markdown)
                 else setCurrentCoverLetter('')
+              } else if (s.mode === 'linkedin-post') {
+                setIsLinkedInRunning(s.status === 'RUNNING')
+                if (s.markdown) setCurrentLinkedInPost(s.markdown)
+                else setCurrentLinkedInPost('')
               } else {
                 setIsResumeRunning(s.status === 'RUNNING')
                 if (s.markdown) setCurrentMarkdown(s.markdown)
@@ -71,11 +78,14 @@ export default function App() {
              if (data.job.mode === 'intelligence') {
                 setIsIntelligenceRunning(true)
                 setIntelligenceResults(null)
-             } else if (data.job.mode === 'cover-letter') {
-                setIsCoverLetterRunning(true)
-                setCurrentCoverLetter('')
-             } else {
-                setIsResumeRunning(true)
+              } else if (data.job.mode === 'cover-letter') {
+                 setIsCoverLetterRunning(true)
+                 setCurrentCoverLetter('')
+              } else if (data.job.mode === 'linkedin-post') {
+                 setIsLinkedInRunning(true)
+                 setCurrentLinkedInPost('')
+              } else {
+                 setIsResumeRunning(true)
                 setCurrentMarkdown('')
              }
              setBulkProgress({ current: 0, total: data.job.totalChunks, phase: 'idle' })
@@ -83,8 +93,9 @@ export default function App() {
            case 'RECOVERY':
               if (data.state.status === 'RUNNING') {
                 if (data.state.id.includes(':intelligence')) setIsIntelligenceRunning(true)
-                else if (data.state.id.includes(':cover-letter')) setIsCoverLetterRunning(true)
-                else setIsResumeRunning(true)
+                 else if (data.state.id.includes(':cover-letter')) setIsCoverLetterRunning(true)
+                 else if (data.state.id.includes(':linkedin-post')) setIsLinkedInRunning(true)
+                 else setIsResumeRunning(true)
                 setBulkProgress({ 
                    current: data.state.currentChunk || 0, 
                    total: data.state.totalChunks || 0, 
@@ -96,11 +107,13 @@ export default function App() {
              setBulkProgress({ ...useStore.getState().bulkProgress, phase: data.phase })
              break
            case 'MD_CHUNK':
-             if (data.mode === 'cover-letter') {
-                setCurrentCoverLetter((prev: string) => prev + data.chunk)
-             } else {
-                setCurrentMarkdown((prev: string) => prev + data.chunk)
-             }
+              if (data.mode === 'cover-letter') {
+                 setCurrentCoverLetter((prev: string) => prev + data.chunk)
+              } else if (data.mode === 'linkedin-post') {
+                 setCurrentLinkedInPost((prev: string) => prev + data.chunk)
+              } else {
+                 setCurrentMarkdown((prev: string) => prev + data.chunk)
+              }
              break
            case 'CHUNK_COMPLETE':
              setBulkProgress({ ...useStore.getState().bulkProgress, current: data.index, total: data.total })
@@ -111,29 +124,32 @@ export default function App() {
               }
               break
             case 'COMPLETE':
-               if (data.markdown) {
-                  if (data.mode === 'cover-letter') setCurrentCoverLetter(data.markdown)
-                  else setCurrentMarkdown(data.markdown)
-               }
+                if (data.markdown) {
+                   if (data.mode === 'cover-letter') setCurrentCoverLetter(data.markdown)
+                   else if (data.mode === 'linkedin-post') setCurrentLinkedInPost(data.markdown)
+                   else setCurrentMarkdown(data.markdown)
+                }
                if (data.mode === 'intelligence' && data.data) {
                   setIntelligenceResults(data.data)
                }
-               setIsResumeRunning(false)
-               setIsIntelligenceRunning(false)
-               setIsCoverLetterRunning(false)
+                setIsResumeRunning(false)
+                setIsIntelligenceRunning(false)
+                setIsCoverLetterRunning(false)
+                setIsLinkedInRunning(false)
                toast.success("Job Synchronized Successfully")
                break
            case 'ERROR':
-             setIsIntelligenceRunning(false)
-             setIsResumeRunning(false)
-             setIsCoverLetterRunning(false)
+              setIsIntelligenceRunning(false)
+              setIsResumeRunning(false)
+              setIsCoverLetterRunning(false)
+              setIsLinkedInRunning(false)
              toast.error(data.error)
              break
         }
       }
       return () => eventSource.close()
     }
-  }, [user, BACKEND_URL, checkAuth, setSseConnected, setIsIntelligenceRunning, setIsResumeRunning, setIsCoverLetterRunning, setCurrentMarkdown, setCurrentCoverLetter, setBulkProgress, setIntelligenceResults])
+  }, [user, BACKEND_URL, checkAuth, setSseConnected, setIsIntelligenceRunning, setIsResumeRunning, setIsCoverLetterRunning, setIsLinkedInRunning, setCurrentMarkdown, setCurrentCoverLetter, setCurrentLinkedInPost, setBulkProgress, setIntelligenceResults])
 
   useEffect(() => {
     const root = window.document.documentElement
@@ -187,6 +203,10 @@ export default function App() {
             <Route 
               path="/cover-letter" 
               element={!user ? <Navigate to="/login" /> : <CoverLetter />} 
+            />
+            <Route 
+              path="/linkedin-post" 
+              element={!user ? <Navigate to="/login" /> : <LinkedInPost />} 
             />
           </Routes>
         </div>

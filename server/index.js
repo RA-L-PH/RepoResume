@@ -16,6 +16,7 @@ const { generatePDFFromMarkdown } = require('./pdf-exporter');
 const { runIntelligenceEngine } = require('./engines/intelligence-engine');
 const { runResumeEngine, generateLatexSnippet } = require('./engines/resume-engine');
 const { runCoverLetterEngine } = require('./engines/cover-letter-engine');
+const { runLinkedInPostEngine } = require('./engines/linkedin-post-engine');
 const { scrapePage } = require('./scraper');
 const Database = require('better-sqlite3');
 const SqliteStore = require('better-sqlite3-session-store')(session);
@@ -124,6 +125,18 @@ async function runCoverLetterTask(userId, accessToken, repos, jobProfile, static
   });
 }
 
+async function runLinkedInPostTask(userId, accessToken, repos, jobProfile, staticInfo, resumeModel, humanize) {
+  const job = { id: `${userId}:linkedin-post`, userId, status: 'RUNNING', phase: 'INITIALIZING', results: [], markdown: '', totalChunks: 0, currentChunk: 0 };
+  jobs.set(job.id, job);
+  broadcast(userId, { type: 'START', job });
+  runLinkedInPostEngine({ userId, accessToken, repos, mode: 'linkedin-post', broadcast, nvidia, cache: analysisCache, 
+    saveCache: async (c) => { 
+      analysisCache = c; 
+      for (const [name, data] of Object.entries(c)) db.saveRepoCache(name, data);
+    }, job, jobProfile, staticInfo, callAI, resumeModel, humanize 
+  });
+}
+
 // Routes
 app.get('/auth/github', passport.authenticate('github', { scope: ['repo', 'user'] }));
 app.get('/auth/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => res.redirect(process.env.FRONTEND_URL || 'http://localhost:5173'));
@@ -208,6 +221,15 @@ app.post('/api/generate-cover-letter', async (req, res) => {
   const { repos, jobProfile, staticInfo, resumeModel, humanize } = req.body;
   if (jobs.get(`${userId}:cover-letter`)?.status === 'RUNNING') return res.status(429).end();
   runCoverLetterTask(userId, req.user.accessToken, repos, jobProfile, staticInfo || {}, resumeModel, humanize);
+  res.json({ message: 'Started' });
+});
+
+app.post('/api/generate-linkedin-post', async (req, res) => {
+  if (!req.isAuthenticated()) return res.status(401).end();
+  const userId = getEmailHash(req.user.emails?.[0]?.value || req.user.id);
+  const { repos, jobProfile, staticInfo, resumeModel, humanize } = req.body;
+  if (jobs.get(`${userId}:linkedin-post`)?.status === 'RUNNING') return res.status(429).end();
+  runLinkedInPostTask(userId, req.user.accessToken, repos, jobProfile, staticInfo || {}, resumeModel, humanize);
   res.json({ message: 'Started' });
 });
 
