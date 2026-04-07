@@ -225,10 +225,14 @@ app.post('/api/generate-resume', async (req, res) => {
     try {
       console.log(`\x1b[34m[AUTO-SELECT]\x1b[0m Fetching repos for ${userId}...`);
       const { data } = await axios.get('https://api.github.com/user/repos?sort=updated&per_page=100', {
-        headers: { Authorization: `token ${req.user.accessToken}` }
+        headers: { 
+          Authorization: `token ${req.user.accessToken}`,
+          'User-Agent': 'RepoResume-Server/1.0'
+        },
+        timeout: 10000 
       });
       activeRepos = data;
-    } catch (e) { console.error("Auto-select fetch failed", e); }
+    } catch (e) { console.error("Auto-select fetch failed", e.message); }
   }
 
   runResumeTask(userId, req.user.accessToken, activeRepos, jobProfile, staticInfo || {}, autoSelect, resumeModel, humanize);
@@ -250,6 +254,20 @@ app.post('/api/profile', async (req, res) => {
   res.json({ success: true });
 });
 
+app.post('/auth/logout', (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+    res.json({ success: true });
+  });
+});
+
+app.get('/auth/logout', (req, res, next) => {
+  req.logout((err) => {
+    if (err) return next(err);
+    res.redirect(process.env.FRONTEND_URL || 'http://localhost:5173');
+  });
+});
+
 app.post('/api/export-pdf', async (req, res) => {
   const pdf = await generatePDFFromMarkdown(req.body.markdown);
   res.setHeader('Content-Type', 'application/pdf');
@@ -262,8 +280,19 @@ app.post('/api/generate-latex', async (req, res) => {
 });
 
 app.get('/api/repos', async (req, res) => {
-  const { data } = await axios.get('https://api.github.com/user/repos?sort=updated&per_page=100', { headers: { Authorization: `token ${req.user.accessToken}` } });
-  res.json(data);
+  try {
+    const { data } = await axios.get('https://api.github.com/user/repos?sort=updated&per_page=100', { 
+      headers: { 
+        Authorization: `token ${req.user.accessToken}`,
+        'User-Agent': 'RepoResume-Server/1.0'
+      },
+      timeout: 10000
+    });
+    res.json(data);
+  } catch (e) {
+    console.error("Fetch repos error:", e.message);
+    res.status(e.response?.status || 500).json({ error: e.message });
+  }
 });
 
 app.listen(PORT, () => console.log(`[SERVER] Running on ${PORT}`));

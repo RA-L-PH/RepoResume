@@ -4,7 +4,15 @@ require('dotenv').config();
 const nvidia = new OpenAI({
   apiKey: process.env.NVIDIA_API_KEY,
   baseURL: 'https://integrate.api.nvidia.com/v1',
+  maxRetries: 3,
+  timeout: 60000,
+  defaultHeaders: {
+    'User-Agent': 'RepoResume-Server/1.0',
+  }
 });
+
+// Helper for delay
+const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
 // Fallback logic for AI models
 async function callAI(messages, options = {}) {
@@ -36,6 +44,8 @@ async function callAI(messages, options = {}) {
       if (attempts < fallbacks.length) {
         currentModel = fallbacks[attempts];
         attempts++;
+        console.log(`[AI RETRY] Waiting 2s before fallback to ${currentModel}...`);
+        await delay(2000); 
       } else {
         throw error;
       }
