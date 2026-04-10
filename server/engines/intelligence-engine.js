@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 async function runIntelligenceEngine(ctx) {
-  const { userId, accessToken, repos, mode, broadcast, nvidia, cache, saveCache, job, callAI, intelModel, staticInfo } = ctx;
+  const { userId, accessToken, repos, mode, broadcast, nvidia, cache, saveCache, job, callAI, intelModel, staticInfo, apiKey } = ctx;
   const authHeaders = { Authorization: `token ${accessToken}` };
   
   // Helper to determine extra body based on model
@@ -99,7 +99,8 @@ async function runIntelligenceEngine(ctx) {
           const basicCompletion = await callAI([{ role: "system", content: basicPrompt }, { role: "user", content: docString }], {
             model: modelToUse,
             response_format: { type: "json_object" },
-            ...extraParams
+            ...extraParams,
+            apiKey
           });
           if (job.status === 'STOPPED') return;
           const parsed = JSON.parse(basicCompletion.choices[0].message.content);
@@ -154,7 +155,8 @@ async function runIntelligenceEngine(ctx) {
         const completion = await callAI([{ role: "system", content: sysPrompt }, { role: "user", content: docString }], {
           model: modelToUse,
           response_format: { type: "json_object" },
-          ...extraParams
+          ...extraParams,
+          apiKey
         });
         if (job.status === 'STOPPED') return;
         
@@ -186,7 +188,8 @@ async function runIntelligenceEngine(ctx) {
     const consCompletion = await callAI([{ role: "system", content: consSysPrompt }, { role: "user", content: JSON.stringify(job.results) }], {
       model: modelToUse,
       response_format: { type: "json_object" },
-      ...extraParams
+      ...extraParams,
+      apiKey
     });
     if (job.status === 'STOPPED') return;
     

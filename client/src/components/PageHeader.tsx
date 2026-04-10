@@ -1,4 +1,4 @@
-import { User, LogOut, Sun, Moon } from 'lucide-react'
+import { User, LogOut, Sun, Moon, Settings as SettingsIcon } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { cn } from '../utils/cn'
 import { useStore } from '../store'
@@ -47,7 +47,7 @@ export function PageHeader() {
            </div>
         </div>
         <div className="flex items-center gap-6">
-           <div className="flex items-center gap-3 group cursor-default">
+           <Link to="/settings" className="flex items-center gap-3 group">
               <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-indigo-500 to-fuchsia-500 p-[1px] overflow-hidden">
                  <div className="h-full w-full rounded-full bg-bg-color flex items-center justify-center overflow-hidden">
                    {user.photos?.[0]?.value ? (
@@ -57,10 +57,17 @@ export function PageHeader() {
                    )}
                  </div>
               </div>
-              <span className="text-[10px] font-bold text-secondary uppercase tracking-widest">{user.username}</span>
-           </div>
+              <span className="text-[10px] font-bold text-secondary group-hover:text-primary uppercase tracking-widest transition-colors">{user.username}</span>
+           </Link>
            
            <div className="flex items-center gap-2 border-l border-border-color pl-6">
+             <Link 
+               to="/settings"
+               className={cn("p-2 rounded-lg transition-all", activeView === 'settings' ? "bg-indigo-500/10 text-indigo-500" : "hover:bg-indigo-500/10 text-secondary hover:text-indigo-500")}
+               title="Settings"
+             >
+               <SettingsIcon size={15} />
+             </Link>
              <button 
                onClick={toggleTheme}
                className="p-2 hover:bg-indigo-500/10 rounded-lg text-secondary hover:text-indigo-500 transition-all"

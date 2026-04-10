@@ -9,6 +9,10 @@ import { Explorer } from './pages/Explorer'
 import { ResumeMaker } from './pages/ResumeMaker'
 import { CoverLetter } from './pages/CoverLetter'
 import { LinkedInPost } from './pages/LinkedInPost'
+import { Settings } from './pages/Settings'
+
+// Components
+import { ApiKeyModal } from './components/ApiKeyModal'
 
 // Store
 import { useStore } from './store'
@@ -208,7 +212,12 @@ export default function App() {
               path="/linkedin-post" 
               element={!user ? <Navigate to="/login" /> : <LinkedInPost />} 
             />
+            <Route 
+              path="/settings" 
+              element={!user ? <Navigate to="/login" /> : <Settings />} 
+            />
           </Routes>
+          {user && <ApiKeyModal />}
         </div>
       </BrowserRouter>
     </div>

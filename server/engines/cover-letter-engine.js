@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 async function runCoverLetterEngine(ctx) {
-  const { userId, accessToken, repos, mode, broadcast, nvidia, job, jobProfile, staticInfo, callAI, resumeModel, humanize } = ctx;
+  const { userId, accessToken, repos, mode, broadcast, nvidia, job, jobProfile, staticInfo, callAI, resumeModel, humanize, apiKey } = ctx;
   const authHeaders = { Authorization: `token ${accessToken}` };
   
   const getExtra = (m) => {
@@ -34,7 +34,8 @@ async function runCoverLetterEngine(ctx) {
     const analysisComp = await callAI([{ role: "system", content: "AI Professional Career Mirror" }, { role: "user", content: analysisPrompt }], {
       model: modelToUse,
       response_format: { type: "json_object" },
-      ...extraParams
+      ...extraParams,
+      apiKey
     });
     const strategy = JSON.parse(analysisComp.choices[0].message.content);
 
@@ -57,7 +58,8 @@ async function runCoverLetterEngine(ctx) {
     const evidenceComp = await callAI([{ role: "system", content: "Senior Technical Interviewer" }, { role: "user", content: evidencePrompt }], {
       model: modelToUse,
       response_format: { type: "json_object" },
-      ...extraParams
+      ...extraParams,
+      apiKey
     });
     const parsedEvidence = JSON.parse(evidenceComp.choices[0].message.content);
 
@@ -94,7 +96,8 @@ async function runCoverLetterEngine(ctx) {
     const stream = await callAI([{ role: "system", content: "AI Cover Letter Architect" }, { role: "user", content: narrativePrompt }], {
       model: modelToUse,
       stream: true,
-      ...extraParams
+      ...extraParams,
+      apiKey
     });
 
     job.markdown = "";

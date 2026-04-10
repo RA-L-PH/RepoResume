@@ -6,7 +6,8 @@ import remarkGfm from 'remark-gfm'
 import { 
   FileText, GraduationCap, Briefcase, User, 
   Zap, Loader2, Sparkles, Send, Award, Shield, Save, Edit3,
-  Bold, Italic, Heading1, Heading2, Heading3, List, ListOrdered, Link2, SeparatorHorizontal, Table
+  Bold, Italic, Heading1, Heading2, Heading3, List, ListOrdered, Link2, SeparatorHorizontal, Table,
+  Layout, HelpCircle, AlertCircle, CheckCircle2
 } from 'lucide-react'
 import { PageHeader } from '../components/PageHeader'
 import { cn } from '../utils/cn'
@@ -45,6 +46,9 @@ export function ResumeMaker() {
   const BACKEND_URL = useStore(s => s.BACKEND_URL)
   const resumeModel = useStore(s => s.resumeModel)
   const setResumeModel = useStore(s => s.setResumeModel)
+  const resumeTemplate = useStore(s => s.resumeTemplate)
+  const setResumeTemplate = useStore(s => s.setResumeTemplate)
+  const availableTemplates = useStore(s => s.availableTemplates)
   const humanize = useStore(s => s.humanize)
   const setHumanize = useStore(s => s.setHumanize)
 
@@ -224,6 +228,85 @@ export function ResumeMaker() {
                       ))}
                     </select>
                   </div>
+                </div>
+              </div>
+
+              {/* Template & Architecture Selection */}
+              <div className="space-y-3">
+                <h3 className="text-[8px] font-black uppercase tracking-[0.2em] text-emerald-400 flex items-center gap-1.5 px-1">
+                  <Layout size={10} className="fill-emerald-400/20" /> Architecture Selection
+                </h3>
+                <div className="space-y-3 p-3 bg-emerald-500/5 border border-emerald-500/20 rounded-xl hover:border-emerald-500/30 transition-all shadow-sm">
+                  <div className="space-y-1">
+                    <label className="text-[7px] font-bold text-secondary uppercase tracking-tight">System Template</label>
+                    <select 
+                      className="w-full bg-transparent border-b border-border-color py-1 text-[11px] text-primary focus:outline-none focus:border-emerald-500/40"
+                      value={resumeTemplate} onChange={e => setResumeTemplate(e.target.value)}
+                    >
+                      {availableTemplates.map(t => (
+                        <option key={t.id} value={t.id}>{t.name} ({t.format})</option>
+                      ))}
+                    </select>
+                    <p className="text-[7px] text-secondary/60 mt-1 italic">
+                      {availableTemplates.find(t => t.id === resumeTemplate)?.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Format Intelligence */}
+              <div className="space-y-4">
+                <h3 className="text-[8px] font-black uppercase tracking-[0.2em] text-orange-400 flex items-center gap-1.5 px-1">
+                  <HelpCircle size={10} className="fill-orange-400/20" /> Format Intelligence
+                </h3>
+                <div className="space-y-4 px-1">
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-primary">
+                      <CheckCircle2 size={10} className="text-emerald-500" />
+                      <span className="text-[9px] font-black uppercase tracking-tight">1. Reverse-Chronological</span>
+                    </div>
+                    <p className="text-[8px] text-secondary/70 leading-relaxed">
+                      Best for ATS. Preferred by 98% of Fortune 500s. Lists work history in reverse order, starting with the most recent role.
+                      <span className="block mt-0.5 text-secondary/40 italic font-bold">Best for: Steady career paths.</span>
+                    </p>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-primary">
+                      <CheckCircle2 size={10} className="text-blue-500" />
+                      <span className="text-[9px] font-black uppercase tracking-tight">2. Hybrid (Combination)</span>
+                    </div>
+                    <p className="text-[8px] text-secondary/70 leading-relaxed">
+                      Highly Compatible. Balances skills-first with verifiable timeline. keywords for ATS, data for humans.
+                      <span className="block mt-0.5 text-secondary/40 italic font-bold">Best for: Mid-level & career changers.</span>
+                    </p>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <div className="flex items-center gap-1.5 text-primary">
+                      <AlertCircle size={10} className="text-orange-500" />
+                      <span className="text-[9px] font-black uppercase tracking-tight">3. Functional (Skills-Based)</span>
+                    </div>
+                    <p className="text-[8px] text-secondary/70 leading-relaxed">
+                      Caution Required. Groups experience under skill categories. Older ATS may struggle to link skills to timeframes.
+                      <span className="block mt-0.5 text-secondary/40 italic font-bold">Best for: Freshers & freelancers.</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ATS Rules of Thumb */}
+              <div className="space-y-3">
+                <div className="p-3 bg-red-500/5 border border-red-500/20 rounded-xl">
+                   <h4 className="text-[7px] font-black uppercase text-red-400 tracking-[0.2em] flex items-center gap-1 mb-2">
+                     <AlertCircle size={8} /> Technical ATS Rules
+                   </h4>
+                   <ul className="space-y-1.5 text-[8px] text-secondary/70 list-disc pl-3 leading-tight">
+                     <li>Stick to Single Columns</li>
+                     <li>Avoid Text Boxes & Tables</li>
+                     <li>Use Standard Headings (e.g. "Work Experience")</li>
+                     <li>Save as Text-Based PDF or .docx</li>
+                   </ul>
                 </div>
               </div>
 

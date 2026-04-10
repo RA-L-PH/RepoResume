@@ -89,7 +89,7 @@ const broadcast = (userId, data) => {
 };
 
 // Task Runners (Defining BEFORE routes to avoid hoisting confusion)
-async function runIntelligenceTask(userId, accessToken, repos, intelModel, staticInfo) {
+async function runIntelligenceTask(userId, accessToken, repos, intelModel, staticInfo, apiKey) {
   const job = { id: `${userId}:intelligence`, userId, status: 'RUNNING', phase: 'INITIALIZING', results: [], consolidated: null, totalChunks: 0, currentChunk: 0 };
   jobs.set(job.id, job);
   broadcast(userId, { type: 'START', job });
@@ -97,11 +97,11 @@ async function runIntelligenceTask(userId, accessToken, repos, intelModel, stati
     saveCache: async (c) => { 
       analysisCache = c; 
       for (const [name, data] of Object.entries(c)) db.saveRepoCache(name, data);
-    }, job, staticInfo, callAI, intelModel 
+    }, job, staticInfo, callAI, intelModel, apiKey 
   });
 }
 
-async function runResumeTask(userId, accessToken, repos, jobProfile, staticInfo, autoSelect, resumeModel, humanize) {
+async function runResumeTask(userId, accessToken, repos, jobProfile, staticInfo, autoSelect, resumeModel, humanize, apiKey) {
   const job = { id: `${userId}:resume`, userId, status: 'RUNNING', phase: 'INITIALIZING', results: [], consolidated: null, markdown: '', totalChunks: 0, currentChunk: 0, humanize };
   jobs.set(job.id, job);
   broadcast(userId, { type: 'START', job });
@@ -109,11 +109,11 @@ async function runResumeTask(userId, accessToken, repos, jobProfile, staticInfo,
     saveCache: async (c) => { 
       analysisCache = c; 
       for (const [name, data] of Object.entries(c)) db.saveRepoCache(name, data);
-    }, job, jobProfile, staticInfo, loadProfiles: async () => [staticInfo], callAI, resumeModel, humanize 
+    }, job, jobProfile, staticInfo, loadProfiles: async () => [staticInfo], callAI, resumeModel, humanize, apiKey 
   });
 }
 
-async function runCoverLetterTask(userId, accessToken, repos, jobProfile, staticInfo, resumeModel, humanize) {
+async function runCoverLetterTask(userId, accessToken, repos, jobProfile, staticInfo, resumeModel, humanize, apiKey) {
   const job = { id: `${userId}:cover-letter`, userId, status: 'RUNNING', phase: 'INITIALIZING', results: [], markdown: '', totalChunks: 0, currentChunk: 0 };
   jobs.set(job.id, job);
   broadcast(userId, { type: 'START', job });
@@ -121,11 +121,11 @@ async function runCoverLetterTask(userId, accessToken, repos, jobProfile, static
     saveCache: async (c) => { 
       analysisCache = c; 
       for (const [name, data] of Object.entries(c)) db.saveRepoCache(name, data);
-    }, job, jobProfile, staticInfo, callAI, resumeModel, humanize 
+    }, job, jobProfile, staticInfo, callAI, resumeModel, humanize, apiKey 
   });
 }
 
-async function runLinkedInPostTask(userId, accessToken, repos, jobProfile, staticInfo, resumeModel, humanize) {
+async function runLinkedInPostTask(userId, accessToken, repos, jobProfile, staticInfo, resumeModel, humanize, apiKey) {
   const job = { id: `${userId}:linkedin-post`, userId, status: 'RUNNING', phase: 'INITIALIZING', results: [], markdown: '', totalChunks: 0, currentChunk: 0 };
   jobs.set(job.id, job);
   broadcast(userId, { type: 'START', job });
@@ -133,7 +133,7 @@ async function runLinkedInPostTask(userId, accessToken, repos, jobProfile, stati
     saveCache: async (c) => { 
       analysisCache = c; 
       for (const [name, data] of Object.entries(c)) db.saveRepoCache(name, data);
-    }, job, jobProfile, staticInfo, callAI, resumeModel, humanize 
+    }, job, jobProfile, staticInfo, callAI, resumeModel, humanize, apiKey 
   });
 }
 
@@ -163,9 +163,10 @@ app.get('/api/stream', (req, res) => {
 app.post('/api/analyze-intelligence', (req, res) => {
   if (!req.isAuthenticated()) return res.status(401).end();
   const userId = getEmailHash(req.user.emails?.[0]?.value || req.user.id);
+  const user = db.getUser(req.user.id);
   const { repos, intelModel, staticInfo } = req.body;
   if (jobs.get(`${userId}:intelligence`)?.status === 'RUNNING') return res.status(429).end();
-  runIntelligenceTask(userId, req.user.accessToken, repos, intelModel, staticInfo || {});
+  runIntelligenceTask(userId, req.user.accessToken, repos, intelModel, staticInfo || {}, user?.profileData?.nvidiaApiKey);
   res.json({ message: 'Started' });
 });
 
@@ -206,9 +207,11 @@ app.post('/api/research-links', async (req, res) => {
   
   OUTPUT: Strictly a concise professional intelligence summary paragraph.`;
 
+  const user = db.getUser(req.user.id);
   const summaryComp = await callAI([{ role: "system", content: "Corporate Intelligence Archivist" }, { role: "user", content: prompt }], {
     model: resumeModel || "meta/llama-3.3-70b-instruct",
-    max_tokens: 800
+    max_tokens: 800,
+    apiKey: user?.profileData?.nvidiaApiKey
   });
 
   const summary = summaryComp.choices[0].message.content;
@@ -218,18 +221,20 @@ app.post('/api/research-links', async (req, res) => {
 app.post('/api/generate-cover-letter', async (req, res) => {
   if (!req.isAuthenticated()) return res.status(401).end();
   const userId = getEmailHash(req.user.emails?.[0]?.value || req.user.id);
+  const user = db.getUser(req.user.id);
   const { repos, jobProfile, staticInfo, resumeModel, humanize } = req.body;
   if (jobs.get(`${userId}:cover-letter`)?.status === 'RUNNING') return res.status(429).end();
-  runCoverLetterTask(userId, req.user.accessToken, repos, jobProfile, staticInfo || {}, resumeModel, humanize);
+  runCoverLetterTask(userId, req.user.accessToken, repos, jobProfile, staticInfo || {}, resumeModel, humanize, user?.profileData?.nvidiaApiKey);
   res.json({ message: 'Started' });
 });
 
 app.post('/api/generate-linkedin-post', async (req, res) => {
   if (!req.isAuthenticated()) return res.status(401).end();
   const userId = getEmailHash(req.user.emails?.[0]?.value || req.user.id);
+  const user = db.getUser(req.user.id);
   const { repos, jobProfile, staticInfo, resumeModel, humanize } = req.body;
   if (jobs.get(`${userId}:linkedin-post`)?.status === 'RUNNING') return res.status(429).end();
-  runLinkedInPostTask(userId, req.user.accessToken, repos, jobProfile, staticInfo || {}, resumeModel, humanize);
+  runLinkedInPostTask(userId, req.user.accessToken, repos, jobProfile, staticInfo || {}, resumeModel, humanize, user?.profileData?.nvidiaApiKey);
   res.json({ message: 'Started' });
 });
 
@@ -257,7 +262,8 @@ app.post('/api/generate-resume', async (req, res) => {
     } catch (e) { console.error("Auto-select fetch failed", e.message); }
   }
 
-  runResumeTask(userId, req.user.accessToken, activeRepos, jobProfile, staticInfo || {}, autoSelect, resumeModel, humanize);
+  const user = db.getUser(req.user.id);
+  runResumeTask(userId, req.user.accessToken, activeRepos, jobProfile, staticInfo || {}, autoSelect, resumeModel, humanize, user?.profileData?.nvidiaApiKey);
   res.json({ message: 'Started' });
 });
 
@@ -266,6 +272,20 @@ app.post('/api/stop-resume', (req, res) => {
   const userId = getEmailHash(req.user.emails?.[0]?.value || req.user.id);
   const rj = jobs.get(`${userId}:resume`);
   if (rj) { rj.status = 'STOPPED'; db.saveJob(rj); jobs.delete(`${userId}:resume`); broadcast(userId, { type: 'ERROR', error: 'Stopped' }); }
+  res.json({ success: true });
+});
+
+app.post('/api/settings', async (req, res) => {
+  if (!req.isAuthenticated()) return res.status(401).send();
+  const user = db.getUser(req.user.id);
+  if (user) {
+    user.profileData = { 
+      ...(user.profileData || {}), 
+      nvidiaApiKey: req.body.nvidiaApiKey,
+      selectedModels: req.body.selectedModels
+    };
+    db.saveUser(user);
+  }
   res.json({ success: true });
 });
 

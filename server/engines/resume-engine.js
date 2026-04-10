@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 async function runResumeEngine(ctx) {
-  const { userId, accessToken, repos, mode, broadcast, nvidia, cache, saveCache, job, jobProfile, staticInfo, loadProfiles, callAI, resumeModel } = ctx;
+  const { userId, accessToken, repos, mode, broadcast, nvidia, cache, saveCache, job, jobProfile, staticInfo, loadProfiles, callAI, resumeModel, apiKey } = ctx;
   const authHeaders = { Authorization: `token ${accessToken}` };
   
   const getExtra = (m) => {
@@ -55,7 +55,8 @@ async function runResumeEngine(ctx) {
       }, { role: "user", content: JSON.stringify(repoMeta) }], {
         model: modelToUse,
         response_format: { type: "json_object" },
-        ...extraParams
+        ...extraParams,
+        apiKey
       });
       
       try {
@@ -96,7 +97,7 @@ async function runResumeEngine(ctx) {
       if (docString) {
         const sysPrompt = `Analyze these repositories to extract resume intelligence for the role: "${jobProfile.title}". JD: ${jobProfile.description}.
         Respond ONLY with a JSON object: { "projects": [{ "projectName", "oneLineSummary", "techStack": [], "bullets": [] }] }`;
-        const completion = await callAI([{ role: "system", content: sysPrompt }, { role: "user", content: docString }], { model: modelToUse, response_format: { type: "json_object" }, ...extraParams });
+        const completion = await callAI([{ role: "system", content: sysPrompt }, { role: "user", content: docString }], { model: modelToUse, response_format: { type: "json_object" }, ...extraParams, apiKey });
         const parsed = JSON.parse(completion.choices[0].message.content);
         const normalized = Array.isArray(parsed.projects) ? parsed.projects : (Array.isArray(parsed) ? parsed : []);
         normalized.forEach(s => {
@@ -114,7 +115,7 @@ async function runResumeEngine(ctx) {
     broadcast(userId, { type: 'PHASE_CHANGE', phase: 'CONSOLIDATING' });
     const validNames = job.results.map(r => r.projectName || r.name);
     const consPrompt = `Select the top 3-5 projects from [${validNames.join(', ')}] for role: ${jobProfile.title}. Write a summary highlighting soft skills: ${staticInfo.softSkills || ''}. Respond ONLY with JSON: { professionalSummary, technicalSkills, projects: [{name, techStack: [], resumeBullets: []}] }.`;
-    const consComp = await callAI([{ role: "system", content: consPrompt }, { role: "user", content: JSON.stringify(job.results) }], { model: modelToUse, response_format: { type: "json_object" }, ...extraParams });
+    const consComp = await callAI([{ role: "system", content: consPrompt }, { role: "user", content: JSON.stringify(job.results) }], { model: modelToUse, response_format: { type: "json_object" }, ...extraParams, apiKey });
     
     const raw = JSON.parse(consComp.choices[0].message.content);
     job.consolidated = {
@@ -146,7 +147,7 @@ async function runResumeEngine(ctx) {
       [ID]: ${staticInfo.name} | ${staticInfo.email} | ${staticInfo.links}
       
       CRITICAL: Use standard Markdown link formatting [link text](url) for ALL URLs (e.g. GitHub, LinkedIn, Portfolio).`
-    }], { model: modelToUse, stream: true, ...extraParams });
+    }], { model: modelToUse, stream: true, ...extraParams, apiKey });
 
     for await (const chunk of mdStream) {
       if (job.status === 'STOPPED') break;

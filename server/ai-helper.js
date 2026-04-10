@@ -21,8 +21,17 @@ async function callAI(messages, options = {}) {
     response_format = undefined,
     stream = false,
     extra_body = {},
-    fallbacks = ["meta/llama-3.1-405b-instruct", "mistralai/mixtral-8x7b-instruct-v0.1"]
+    fallbacks = ["meta/llama-3.1-405b-instruct", "mistralai/mixtral-8x7b-instruct-v0.1"],
+    apiKey = null
   } = options;
+
+  const client = apiKey ? new OpenAI({
+    apiKey: apiKey,
+    baseURL: 'https://integrate.api.nvidia.com/v1',
+    maxRetries: 3,
+    timeout: 60000,
+    defaultHeaders: { 'User-Agent': 'RepoResume-Server/1.0' }
+  }) : nvidia;
 
   let currentModel = model;
   let attempts = 0;
@@ -31,7 +40,7 @@ async function callAI(messages, options = {}) {
   while (attempts < maxAttempts) {
     try {
       console.log(`[AI CALL] Attempt ${attempts + 1} with ${currentModel}`);
-      const completion = await nvidia.chat.completions.create({
+      const completion = await client.chat.completions.create({
         model: currentModel,
         messages: messages,
         response_format: response_format,

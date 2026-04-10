@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 async function runLinkedInPostEngine(ctx) {
-  const { userId, accessToken, repos, mode, broadcast, nvidia, job, jobProfile, staticInfo, callAI, resumeModel, humanize } = ctx;
+  const { userId, accessToken, repos, mode, broadcast, nvidia, job, jobProfile, staticInfo, callAI, resumeModel, humanize, apiKey } = ctx;
   
   const getExtra = (m) => {
     if (m.includes('deepseek-v3')) return { extra_body: { chat_template_kwargs: { thinking: true } } };
@@ -34,7 +34,8 @@ async function runLinkedInPostEngine(ctx) {
     const hookComp = await callAI([{ role: "system", content: "LinkedIn Personal Branding Expert & Tech Evangelist" }, { role: "user", content: hookPrompt }], {
       model: modelToUse,
       response_format: { type: "json_object" },
-      ...extraParams
+      ...extraParams,
+      apiKey
     });
     const hooks = JSON.parse(hookComp.choices[0].message.content);
 
@@ -65,7 +66,8 @@ async function runLinkedInPostEngine(ctx) {
     const stream = await callAI([{ role: "system", content: "Viral Tech Content Creator" }, { role: "user", content: draftPrompt }], {
       model: modelToUse,
       stream: true,
-      ...extraParams
+      ...extraParams,
+      apiKey
     });
 
     job.markdown = "";

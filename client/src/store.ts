@@ -42,8 +42,12 @@ interface AppState {
   theme: 'light' | 'dark'
   intelModel: string
   resumeModel: string
+  resumeTemplate: string
   humanize: boolean
   availableModels: { id: string, name: string }[]
+  availableTemplates: { id: string, name: string, description: string, format: 'chronological' | 'hybrid' | 'functional' }[]
+  nvidiaApiKey: string
+  selectedModels: string[]
   BACKEND_URL: string
 
   setUser: (user: any) => void
@@ -69,7 +73,9 @@ interface AppState {
   setTheme: (theme: 'light' | 'dark') => void
   setIntelModel: (model: string) => void
   setResumeModel: (model: string) => void
+  setResumeTemplate: (template: string) => void
   setHumanize: (v: boolean) => void
+  setNvidiaSettings: (apiKey: string, models: string[]) => void
 
   checkAuth: () => Promise<void>
   fetchRepos: (force?: boolean) => Promise<void>
@@ -104,17 +110,34 @@ export const useStore = create<AppState>((set, get) => ({
   theme: (localStorage.getItem('repo-resume-theme') as 'light' | 'dark') || 'dark',
   intelModel: 'meta/llama-3.3-70b-instruct',
   resumeModel: 'meta/llama-3.3-70b-instruct',
+  resumeTemplate: 'modern-chronological',
   humanize: false,
+  nvidiaApiKey: '',
+  selectedModels: [],
   availableModels: [
     { id: 'meta/llama-3.3-70b-instruct', name: 'Llama 3.3 70B (Balanced)' },
     { id: 'deepseek-ai/deepseek-v3.1', name: 'DeepSeek v3.1 (Reasoning)' },
     { id: 'qwen/qwen3.5-122b-a10b', name: 'Qwen 3.5 120B (Thinking)' },
+    { id: 'nvidia/llama-3.1-405b-instruct', name: 'Llama 3.1 405B (NVIDIA)' },
+    { id: 'nvidia/nemotron-4-340b-instruct', name: 'Nemotron-4 340B (NVIDIA)' },
     { id: 'openai/gpt-oss-120b', name: 'GPT-OSS 120B (Logic)' },
     { id: 'minimaxai/minimax-m2.5', name: 'MiniMax M2.5 (Fast)' },
     { id: 'qwen/qwen2.5-7b-instruct', name: 'Qwen 2.5 7B' },
     { id: 'meta/llama-3.1-70b-instruct', name: 'Llama 3.1 70B' },
     { id: 'mistralai/mistral-7b-instruct-v0.3', name: 'Mistral 7B v0.3' },
     { id: 'rakuten/rakutenai-7b-chat', name: 'Rakuten 7B' }
+  ],
+  availableTemplates: [
+    { id: 'modern-chronological', name: 'Modern Chronological', description: 'Clean, professional, and highly ATS-optimized.', format: 'chronological' },
+    { id: 'minimal-noir', name: 'Minimal Noir', description: 'High-contrast, professional design with a focus on hierarchy.', format: 'chronological' },
+    { id: 'executive-pro', name: 'Executive Pro', description: 'Traditional layout for senior-level leadership positions.', format: 'chronological' },
+    { id: 'technical-hybrid', name: 'Technical Hybrid', description: 'Highlights complex tech stacks while keeping timeline intact.', format: 'hybrid' },
+    { id: 'creative-portfolio', name: 'Creative Portfolio', description: 'Visually engaging for design and front-end specialists.', format: 'hybrid' },
+    { id: 'skill-master', name: 'Skill Master', description: 'Focuses heavily on core competencies and specialized tools.', format: 'functional' },
+    { id: 'career-changer', name: 'Career Changer', description: 'Bridges gaps by emphasizing transferable skills.', format: 'functional' },
+    { id: 'fresher-prime', name: 'Fresher Prime', description: 'Ideal for graduates with internship-focused experience.', format: 'functional' },
+    { id: 'startup-edge', name: 'Startup Edge', description: 'Dynamic and fast-paced aesthetic for modern tech companies.', format: 'hybrid' },
+    { id: 'academic-elite', name: 'Academic Elite', description: 'Standardized format for teaching and research roles.', format: 'chronological' }
   ],
   BACKEND_URL: (import.meta as any).env?.VITE_BACKEND_URL || 'http://localhost:3001',
 
@@ -162,8 +185,15 @@ export const useStore = create<AppState>((set, get) => ({
   setTheme: (theme) => set({ theme }),
   setIntelModel: (intelModel) => set({ intelModel }),
   setResumeModel: (model) => set({ resumeModel: model }),
+  setResumeTemplate: (template) => set({ resumeTemplate: template }),
   setHumanize: (v: boolean) => set({ humanize: v }),
   setSseConnected: (v) => set({ sseConnected: v }),
+  setNvidiaSettings: (nvidiaApiKey, selectedModels) => {
+    set({ nvidiaApiKey, selectedModels })
+    const { BACKEND_URL } = get()
+    axios.post(`${BACKEND_URL}/api/settings`, { nvidiaApiKey, selectedModels })
+      .catch(() => toast.error("Failed to sync settings"))
+  },
 
   checkAuth: async () => {
     try {
@@ -176,10 +206,12 @@ export const useStore = create<AppState>((set, get) => ({
         if (expList) set({ expList })
         if (certList) set({ certList })
         if (seniority) set({ jobProfile: { ...get().jobProfile, seniority } })
+        if (data.profile.nvidiaApiKey) set({ nvidiaApiKey: data.profile.nvidiaApiKey })
+        if (data.profile.selectedModels) set({ selectedModels: data.profile.selectedModels })
         set({ staticInfo: { ...get().staticInfo, ...staticInfo } })
       }
       get().fetchRepos()
-    } catch (err) { set({ user: null }) }
+    } catch { set({ user: null }) }
   },
 
   fetchRepos: async (force = false) => {
@@ -226,7 +258,7 @@ export const useStore = create<AppState>((set, get) => ({
       const endpoint = mode === 'intelligence' ? '/api/analyze-intelligence' : '/api/generate-resume'
       const payload = mode === 'intelligence'
         ? { repos: reposToAnalyze, mode, intelModel }
-        : { repos: reposToAnalyze, jobProfile, staticInfo: enrichedStaticInfo, mode, resumeModel, humanize }
+        : { repos: reposToAnalyze, jobProfile, staticInfo: enrichedStaticInfo, mode, resumeModel, humanize, template: get().resumeTemplate }
       await axios.post(`${BACKEND_URL}${endpoint}`, payload)
     } catch (err: any) { toast.error("Failed to start job") }
   },
